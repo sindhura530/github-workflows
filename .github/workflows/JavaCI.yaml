@@ -13,4 +13,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+  sonar:
+    name: Test - SonarCloud Scan
+    runs-on: ubuntu-18.04
       
