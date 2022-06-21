@@ -13,7 +13,6 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-  sonar:
-    name: Test - SonarCloud Scan
-    runs-on: ubuntu-18.04
+          run : wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+          
       
