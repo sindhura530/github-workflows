@@ -1,0 +1,32 @@
+name: Jenkins
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: update
+        run: sudo apt update
+      - name: install jre
+        run: sudo apt install default-jre
+      - name: version java
+        run: java -version
+      - name: Installing Jenkins
+      - name: add the repository key
+        run : wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+      - name: append the Debian package repository
+        run: sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+      - name: update
+        run: sudo apt update
+      - name: install jenkins
+        run: sudo apt install jenkins
+      - name: start jenkins
+        run: sudo systemctl start jenkins
+      - name: Jenkins status
+        run: sudo systemctl status jenkins
+    
+          
+          
+      
