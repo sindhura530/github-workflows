@@ -47,7 +47,7 @@ jobs:
             
   DeployProd:
     name: Deploy to Production 
-    needs: [DeployStaging]
+    #needs: [DeployStaging]
     runs-on: ubuntu-latest
     environment: 
       name: Production
