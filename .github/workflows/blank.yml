@@ -16,6 +16,10 @@ jobs:
         run: sudo apt-get update
       - name: install aws
         run: sudo apt-get install -y awscli
+      - name: upgrade
+        run: sudo apt-get update
+      - name: install azure
+        run: sudo apt-get install -y azure-cli
       - name: Compile
         run: echo Installations Completed on ubuntu!
     
@@ -23,10 +27,6 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - name: upgrade
-        run: sudo apt-get update
-      - name: install azure
-        run: sudo apt-get install -y azure-cli
       - name: Compile
         run: echo Installations Completed on macos!
         
@@ -34,6 +34,8 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Compile
+        run: echo Installations Completed on windows!
       
   DeployDev:
     name: Deploy to Dev 
