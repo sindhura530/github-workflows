@@ -19,7 +19,7 @@ jobs:
       - name: install aws
         run: sudo apt-get install -y awscli
       - name: Compile
-        run: echo Installations Completed!
+        #run: echo Installations Completed!
 		
   Build-macOS:
     runs-on: macos-latest
