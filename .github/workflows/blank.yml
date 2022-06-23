@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Build:
+  Build-Ubuntu:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -20,23 +20,40 @@ jobs:
         run: sudo apt-get install -y awscli
       - name: Compile
         run: echo Installations Completed!
+		
+  Build-macOS:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: upgrade
+        run: sudo apt-get update
+      - name: install azure
+        run: sudo apt-get install -y azure-cli
+      - name: install aws
+        run: sudo apt-get install -y awscli
+      - name: Compile
+        run: echo Installations Completed!
+  
     
   DeployDev:
     name: Deploy to Dev 
     if: github.event_name == 'pull_request'
-    needs: [Build]
+    needs: [Build-Ubuntu]
     runs-on: ubuntu-latest
     environment: 
       name: Development
       url: 'https://github.com/sindhura530/github-workflows/tree/feature'
     steps:
       - name: Deploy
-        run: echo I am deploying! 
+        run: echo I am deploying!
+  
+  
+
     
   DeployStaging:
     name: Deploy to Staging 
-    if: github.event.ref != 'refs/heads/main'
-    needs: [Build]
+    if: github.event.ref == 'refs/heads/main'
+    needs: [Build-Ubuntu]
     runs-on: ubuntu-latest
     environment: 
       name: Staging
@@ -47,7 +64,7 @@ jobs:
             
   DeployProd:
     name: Deploy to Production 
-    #needs: [DeployStaging]
+    needs: [DeployStaging]
     runs-on: ubuntu-latest
     environment: 
       name: Production
@@ -56,3 +73,4 @@ jobs:
       - name: Deploy
         run: echo I am deploying! 
     
+
