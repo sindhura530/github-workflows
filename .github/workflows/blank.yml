@@ -14,13 +14,24 @@ jobs:
       - uses: actions/checkout@v2
       - name: upgrade
         run: sudo apt-get update
-      - name: install azure
-        run: sudo apt-get install -y azure-cli
       - name: install aws
         run: sudo apt-get install -y awscli
       - name: Compile
-        run: echo Installations Completed!
+        run: echo Installations Completed on ubuntu!
     
+  
+  
+  Build-macos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2x
+      - name: upgrade
+        run: sudo apt-get update
+      - name: install azure
+        run: sudo apt-get install -y azure-cli
+      - name: Compile
+        run: echo Installations Completed on macos!
+      
   DeployDev:
     name: Deploy to Dev 
     if: github.event_name == 'pull_request'
@@ -32,11 +43,7 @@ jobs:
     steps:
       - name: Deploy
         run: echo I am deploying!
-  
-  Build-macos:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
+       
       
   
   
