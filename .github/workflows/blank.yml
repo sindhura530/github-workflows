@@ -24,7 +24,7 @@ jobs:
   Build-macos:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2x
+      - uses: actions/checkout@v2
       - name: upgrade
         run: sudo apt-get update
       - name: install azure
