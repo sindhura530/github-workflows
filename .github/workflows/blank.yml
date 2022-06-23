@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: Staging
-      url: 'http://test.myapp.com'
+      url: 'https://github.com/sindhura530/github-workflows/tree/feature'
     steps:
       - name: Deploy
         run: echo I am deploying! 
