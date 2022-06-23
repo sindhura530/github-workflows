@@ -12,7 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
+      - name: upgrade
+        run: sudo apt-get update
+      - name: install azure
+        run: sudo apt-get install -y azure-cli
+      - name: install aws
+        run: sudo apt-get install -y awscli
       - name: Compile
         run: echo Hello, world!
     
