@@ -19,7 +19,7 @@ jobs:
       - name: install aws
         run: sudo apt-get install -y awscli
       - name: Compile
-        run: Installations completed
+        run: echo Installations Completed!
     
   DeployDev:
     name: Deploy to Dev 
