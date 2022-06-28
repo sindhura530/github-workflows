@@ -92,7 +92,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: Production
-    needs: Quality-Gates
+    needs: [Quality-Gates, ChangeRequest_Validation]
     steps:
        - uses: actions/checkout@v3
        - name: deploying to Prod
