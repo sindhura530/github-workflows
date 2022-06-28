@@ -34,7 +34,7 @@ jobs:
          run: echo 'scanning'
          
   Quality-Gates:
-    if: github.event.ref == 'refs/heads/develop'
+    #if: github.event.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
     needs: security-scan
     steps:
@@ -64,22 +64,24 @@ jobs:
         run: echo 'ChangeRequest Validation "performed"'
     
   Deploy_Develop:
+    
     if: github.event.ref == 'refs/heads/feature'
     runs-on: ubuntu-latest
     environment: 
       name: Development 
-    needs: security-scan
+    needs: Quality-Gates
     steps:
        - uses: actions/checkout@v3
        - name: deploying
          run: echo 'feature branch'
          
   Deploy_Stage:
+    
     if: github.event.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
     environment: 
       name: Staging 
-    needs: security-scan
+    needs: Quality-Gates
     steps:
        - uses: actions/checkout@v3
        - name: deploying into develop branch
@@ -90,7 +92,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: Production
-    needs: security-scan
+    needs: Quality-Gates
     steps:
        - uses: actions/checkout@v3
        - name: deploying to Prod
