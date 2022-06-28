@@ -68,7 +68,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: Development 
-    needs: ChangeRequest_Validation
+    needs: security-scan
     steps:
        - uses: actions/checkout@v3
        - name: deploying
@@ -79,7 +79,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: Staging 
-    needs: Deploy_Develop
+    needs: security-scan
     steps:
        - uses: actions/checkout@v3
        - name: deploying into develop branch
@@ -90,7 +90,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: Production
-    needs: Deploy_Stage
+    needs: security-scan
     steps:
        - uses: actions/checkout@v3
        - name: deploying to Prod
