@@ -22,6 +22,6 @@ jobs:
           java-package: jdk
           java-version: ${{ matrix.java }}
           
-        if: ${{ matrix.java }} == '13'
+        if: ${{ matrix.java }} !== '13'
       - name: Compile the Project
         run: echo "mvn -B compile"
