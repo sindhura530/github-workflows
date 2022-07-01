@@ -27,11 +27,5 @@ jobs:
     - name: Build with Gradle
       run: echo "./gradlew build"
 
-    - name: Build and Push Docker Image
-      uses: sindhu530/docker-build-push@v4
-      with:
-        image: sindhu530/demo-app
-        registry: docker.io
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
+   
          
