@@ -18,11 +18,11 @@ jobs:
     
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [10.x]
         
     steps:
       - uses: actions/checkout@v3
-        if: matrix.node-version == '10.x'
+        #if: matrix.node-version == '10.x'
       - name: pull the Docker image
         run: docker pull ${{ inputs.image_name }}
         
