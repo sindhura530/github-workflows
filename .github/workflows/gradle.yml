@@ -11,7 +11,7 @@ jobs:
         java: [ 11, 12, 13 ]
         
     name: Java ${{ matrix.java }} compile
-    if: ${{ matrix.java }} == '13'
+    
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v2
@@ -21,6 +21,7 @@ jobs:
           distribution: 'adopt'
           java-package: jdk
           java-version: ${{ matrix.java }}
+          
+        if: ${{ matrix.java }} == '13'
       - name: Compile the Project
-        working-directory: github-actions-java-maven
-        run: mvn -B compile
+        run: echo "mvn -B compile"
