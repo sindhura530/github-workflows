@@ -11,7 +11,7 @@ jobs:
         java: [ 11, 12, 13 ]
         
     name: Java ${{ matrix.java }} compile
-    if: matrix.java == ' 11 '
+    if: ${{ matrix.java }} == '13'
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v2
