@@ -76,7 +76,7 @@ jobs:
          run: echo 'feature branch'
          
   Deploy_Stage:
-    if: github.event.ref == 'refs/heads/develop' && github.event_name == 'pull_request'
+    if: github.event.ref == 'refs/heads/develop-1' && github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     environment: 
       name: Staging 
