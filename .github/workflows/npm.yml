@@ -12,18 +12,17 @@ on:
         required: true
       registry_password:
         required: true
-      
 jobs:
   build:
     runs-on: ubuntu-latest
     
+    strategy:
+      matrix:
+        node-version: [12.x]
+        
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'adopt'
-          
+      
       - name: pull the Docker image
         run: docker pull ${{ inputs.image_name }}
         
@@ -46,5 +45,6 @@ jobs:
         
       - name: tag
         run:  docker tag ${{ inputs.image_name }} sindhu530/${{ inputs.image_name }}:latest
+        
       - name: push
         run: docker push sindhu530/${{ inputs.image_name }}:latest
