@@ -1,4 +1,4 @@
-name: Pull and Publish Docker Image
+name: npm
 
 on:
   workflow_call:
