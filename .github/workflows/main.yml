@@ -36,10 +36,10 @@ jobs:
     steps:
        - uses: actions/checkout@v3
        - name: code Analysis
-         run: 'mvn sonar:sonar'
+         run: echo 'mvn sonar:sonar'
           
   security-scan:
-    if: ${{ always() }}
+    #if: ${{ always() }}
     needs: Code-Quality
     #if: github.event.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
@@ -51,7 +51,7 @@ jobs:
   Quality-Gates:
     #if: github.event.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
-    if: ${{ always() }}
+    #if: ${{ always() }}
     needs: security-scan
     steps:
        - uses: actions/checkout@v3
