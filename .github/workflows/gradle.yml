@@ -3,10 +3,7 @@ name: Maven GitHub Actions Sample
 on: [push, pull_request]
 
 jobs:
-
   build:
-    
-  
     strategy:
       matrix:
         #os: [ubuntu-latest, macOS-latest, windows-latest]
@@ -14,28 +11,22 @@ jobs:
         
     #runs-on: ${{ matrix.os }}
     runs-on: ubuntu-latest
-    
         
     steps:
-    
       - uses: actions/checkout@v2
       - name: Set up JDK ${{ matrix.java }}
         uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.java }}
           
-        
-  
       - if: matrix.java == '8'
         run: |
-          npm install
-          npm ci --ignore-scripts
-          npm run build --if-present
-          
+          echo "npm ci --ignore-scripts"
+          npm "run build --if-present          
         name: Build
-      - run: npm test
+      - run: echo "npm test"
 
       - if: matrix.java == '9'
         run: |
-          echo "java9"
-          echo "ionic cordova build andro"
+          echo "npm run build"
+          echo "npm run build"
