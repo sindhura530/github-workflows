@@ -1,24 +1,24 @@
-name: CI and CD Pipeline
-
+name: CI and CD pipeline
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  
+  push: 
+     branches: [main]
   
 jobs:
   inputs:
-     uses: sindhura530/github-workflows/.github/workflows/pipelineConfig.yml@main
+     uses: chaithragudimalla/Project/.github/workflows/pipelineconfig.yaml@main
      
   check:
      needs: inputs
      if: "contains(needs.inputs.outputs.buildTool, 'maven')"
-     uses: chaithragudimalla/Project/.github/workflows/maven.yaml@main
-     
+     uses: chaithragudimalla/Project/.github/workflows/maven.yaml@main    
+     with:
+        dockerImage: ubuntu
+        
   check1:
     needs: inputs
     if: "contains(needs.inputs.outputs.buildTool, 'npm') && contains(needs.inputs.outputs.language, 'java') && contains(needs.inputs.outputs.javaVersion, 1.8)"
-    uses: sindhura530/github-workflows/.github/workflows/npm.yml@main
+    uses: chaithragudimalla/Project/.github/workflows/npm.yaml@main
     with:
       image_name: ubuntu
     secrets:
@@ -29,18 +29,21 @@ jobs:
     needs: inputs
     if: "contains(needs.inputs.outputs.buildTool, 'ng')"
     uses: chaithragudimalla/Project/.github/workflows/ng.yaml@main
-    
+    with:
+        dockerImage: ubuntu
+        
   Code-Quality:
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    needs: [check, check1, check2]
     runs-on: ubuntu-latest
-    needs: check1
     steps:
        - uses: actions/checkout@v3
        - name: code Analysis
          run: echo 'mvn sonar:sonar'
           
   security-scan:
-    #if: ${{ always() }}
-    needs: Code-Quality
+    if: ${{ always() }}
+    needs: [Code-Quality]
     #if: github.event.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
     steps:
@@ -49,10 +52,10 @@ jobs:
          run: echo 'scanning'
          
   Quality-Gates:
+    if: ${{ always() }}
     #if: github.event.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
-    #if: ${{ always() }}
-    needs: security-scan
+    needs: [security-scan]
     steps:
        - uses: actions/checkout@v3
        - name: CodeAnalysis_Quality_gates
@@ -61,54 +64,42 @@ jobs:
          run: echo 'security analysis quality gates'
          
   ChangeRequest_Validation:
-    if: github.event.ref == 'refs/heads/main'
+    if: ${{ always() && github.event.ref == 'refs/heads/main' }}
+    needs: [Quality-Gates]
     runs-on: ubuntu-latest
-    needs: Quality-Gates
     steps:
       - uses: actions/checkout@v3
       - name: validations status
         run: echo 'ChangeRequest Validation "performed"'
     
   Deploy_Develop:
-    if: github.event.ref == 'refs/heads/feature'
+    if: ${{ always() && github.event.ref == 'refs/heads/feature' }}
+    needs: [Quality-Gates]
     runs-on: ubuntu-latest
     environment: 
       name: Development 
-    needs: Quality-Gates
     steps:
        - uses: actions/checkout@v3
        - name: deploying
          run: echo 'feature branch'
-       - name: Raise PR 
-         uses: peter-evans/create-pull-request@v3
-         with:
-          branch: "develop"
-          base: main
-          title: "auto PR"
-          committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
-          author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
-          body:
-            This is to show automatic PR creation
-          token: ${{ secrets.GITHUB_TOKEN }}
-          delete-branch: true
          
   Deploy_Stage:
-    if: github.event.ref == 'refs/heads/develop'
+    if: ${{ always() && github.event.ref == 'refs/heads/develop' }}
+    needs: [Quality-Gates]
     runs-on: ubuntu-latest
     environment: 
       name: Staging 
-    needs: Quality-Gates
     steps:
        - uses: actions/checkout@v3
        - name: deploying into develop branch
          run: echo 'develop branch'
          
   Deploy_PROD:
-    if: github.event.ref == 'refs/heads/main'
+    if: ${{ always() && github.event.ref == 'refs/heads/main' }}
+    needs: [ChangeRequest_Validation]
     runs-on: ubuntu-latest
     environment: 
       name: Production
-    needs: [ChangeRequest_Validation]
     steps:
        - uses: actions/checkout@v3
        - name: deploying to Prod
