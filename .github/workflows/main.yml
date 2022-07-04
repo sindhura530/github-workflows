@@ -36,7 +36,7 @@ jobs:
     steps:
        - uses: actions/checkout@v3
        - name: code Analysis
-         run: echo 'mvn sonar:sonar'
+         run: 'mvn sonar:sonar'
           
   security-scan:
     if: ${{ always() }}
