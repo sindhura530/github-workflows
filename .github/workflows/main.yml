@@ -7,14 +7,7 @@ on:
 jobs:
   inputs:
      uses: sindhura530/github-workflows/.github/workflows/pipelineConfig.yml@main
-     
-  check:
-     needs: inputs
-     if: "contains(needs.inputs.outputs.buildTool, 'maven')"
-     uses: sindhura530/github-workflows/.github/workflows/maven.yml@main    
-     with:
-        dockerImage: ubuntu
-        
+   
   check1:
     needs: inputs
     if: "contains(needs.inputs.outputs.buildTool, 'npm') && contains(needs.inputs.outputs.language, 'java') && contains(needs.inputs.outputs.javaVersion, 1.8)"
@@ -34,7 +27,7 @@ jobs:
         
   Code-Quality:
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
-    needs: [check, check1, check2]
+    needs: [check1, check2]
     runs-on: ubuntu-latest
     steps:
        - uses: actions/checkout@v3
