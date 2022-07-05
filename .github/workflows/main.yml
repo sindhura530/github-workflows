@@ -10,7 +10,9 @@ jobs:
   check:
      needs: inputs
      if: "contains(needs.inputs.outputs.buildTool, 'maven')"
-     uses: chaithragudimalla/Project/.github/workflows/maven.yaml@main    
+     uses: chaithragudimalla/Project/.github/workflows/maven.yaml@main   
+     with:
+        dockerImage: ubuntu
    
         
   check1:
