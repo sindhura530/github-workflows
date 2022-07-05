@@ -2,6 +2,8 @@ name: CI/CD pipeline
 on:
   push: 
      branches: [feature]
+  pull_request:
+    branches: [develop]
   
 jobs:
   inputs:
