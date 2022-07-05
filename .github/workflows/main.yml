@@ -5,7 +5,7 @@ on:
   
 jobs:
   inputs:
-     uses: sindhura530/github-workflows/.github/workflows/pipelineconfig.yaml@main
+     uses: sindhura530/github-workflows/.github/workflows/pipelineConfig.yml@main
      
   check:
      needs: inputs
