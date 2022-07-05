@@ -71,7 +71,13 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: Development 
+      url: sindhura530/github-workflows@feature
     steps:
+      - name: deploying
+        run: |
+             echo " **************************************** "
+             echo " deploying into feature branch is SUCCESS "
+             echo " **************************************** "
       - name: checking out code
         uses: actions/checkout@v2
         
@@ -87,7 +93,7 @@ jobs:
         with:
           branch: "develop"
           base: feature
-          title: "auto PR1"
+          title: "auto PR from feature to develop"
           committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
           author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
           body:
