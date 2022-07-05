@@ -9,10 +9,8 @@ jobs:
      
   check:
      needs: inputs
-     if: "contains(needs.inputs.outputs.buildTool, 'maven')"
+     if: "contains(needs.inputs.outputs.buildTool, 'maven') && contains(needs.inputs.outputs.language, 'java') && contains(needs.inputs.outputs.javaVersion, 1.8)"
      uses: sindhura530/github-workflows/.github/workflows/maven.yml@feature  
-   
-   
         
   check1:
     needs: inputs
@@ -73,10 +71,10 @@ jobs:
       name: Development 
       url: sindhura530/github-workflows@feature
     steps:
-      - name: deploying
+      - name: deploying into feature branch
         run: |
              echo " **************************************** "
-             echo " deploying into feature branch is SUCCESS "
+             echo " dev deployment Finished: SUCCESS "
              echo " **************************************** "
       - name: checking out code
         uses: actions/checkout@v2
@@ -107,18 +105,46 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: Staging 
+      url: sindhura530/github-workflows@develop
     steps:
-       - uses: actions/checkout@v3
-       - name: deploying into develop branch
-         run: echo 'develop branch'
-         
+      - name: deploying
+        run: |
+             echo " **************************************** "
+             echo " stage deployment Finished: SUCCESS "
+             echo " **************************************** "
+      - name: checking out code
+        uses: actions/checkout@v2
+        
+      - name: extract git commit data
+        uses: rlespinasse/git-commit-data-action@v1.x
+
+      - name: Update author information
+        run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
+     
+
+      - name: Raise PR 
+        uses: peter-evans/create-pull-request@v3
+        with:
+          branch: "main"
+          base: develop
+          title: "Auto PR from develop to main"
+          committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
+          author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
+          body:
+            This is to show automatic PR creation
+          token: ${{ secrets.GITHUB_TOKEN }}
+          delete-branch: true
+          
   Deploy_PROD:
     if: ${{ always() && github.event.ref == 'refs/heads/main' }}
     needs: [ChangeRequest_Validation]
     runs-on: ubuntu-latest
     environment: 
       name: Production
+      url: sindhura530/github-workflows@main
     steps:
-       - uses: actions/checkout@v3
-       - name: deploying to Prod
-         run: echo 'master branch'
+      - name: deploying
+        run: |
+             echo " **************************************** "
+             echo " prod deployment Finished: SUCCESS "
+             echo " **************************************** "
