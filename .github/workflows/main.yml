@@ -24,16 +24,10 @@ jobs:
        registry_username: ${{ secrets.REGISTRY_USERNAME }}
        registry_password: ${{ secrets.REGISTRY_PASSWORD }}
        
-  check2:
-    needs: inputs
-    if: "contains(needs.inputs.outputs.buildTool, 'ng')"
-    uses: chaithragudimalla/Project/.github/workflows/ng.yaml@feature
-    with:
-        dockerImage: ubuntu
-        
+
   Code-Quality:
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
-    needs: [check, check1, check2]
+    needs: [check, check1]
     runs-on: ubuntu-latest
     steps:
        - uses: actions/checkout@v3
