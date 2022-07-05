@@ -112,7 +112,7 @@ jobs:
       - name: deploying
         run: |
              echo " **************************************** "
-             echo " stage deployment Finished: SUCCESS "
+             echo " stage deployment Finished: SUCCESS"
              echo " **************************************** "
       - name: checking out code
         uses: actions/checkout@v2
