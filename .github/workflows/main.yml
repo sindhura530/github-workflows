@@ -1,18 +1,38 @@
 name: CI and CD pipeline
 on:
-  
   push: 
      branches: [main]
   
 jobs:
   inputs:
-     uses: sindhura530/github-workflows/.github/workflows/pipelineConfig.yml@main
+     uses: sindhura530/github-workflows/.github/workflows/pipelineconfig.yaml@main
+     
+  check:
+     needs: inputs
+     if: "contains(needs.inputs.outputs.buildTool, 'maven')"
+     uses: chaithragudimalla/Project/.github/workflows/maven.yaml@main    
    
- 
+        
+  check1:
+    needs: inputs
+    if: "contains(needs.inputs.outputs.buildTool, 'npm') && contains(needs.inputs.outputs.language, 'java') && contains(needs.inputs.outputs.javaVersion, 1.8)"
+    uses: sindhura530/github-workflows/.github/workflows/npm.yml@main
+    with:
+      image_name: ubuntu
+    secrets:
+       registry_username: ${{ secrets.REGISTRY_USERNAME }}
+       registry_password: ${{ secrets.REGISTRY_PASSWORD }}
+       
+  check2:
+    needs: inputs
+    if: "contains(needs.inputs.outputs.buildTool, 'ng')"
+    uses: chaithragudimalla/Project/.github/workflows/ng.yaml@main
+    with:
+        dockerImage: ubuntu
         
   Code-Quality:
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
-    needs: [inputs]
+    needs: [check, check1, check2]
     runs-on: ubuntu-latest
     steps:
        - uses: actions/checkout@v3
@@ -60,18 +80,6 @@ jobs:
        - uses: actions/checkout@v3
        - name: deploying
          run: echo 'feature branch'
-       - name: Raise PR 
-         uses: peter-evans/create-pull-request@v3
-         with:
-          branch: "develop"
-          base: main
-          title: "PR1"
-          committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
-          author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
-          body:
-            This is to show automatic PR creation
-          token: ${{ secrets.GITHUB_TOKEN }}
-          delete-branch: true
          
   Deploy_Stage:
     if: ${{ always() && github.event.ref == 'refs/heads/develop' }}
