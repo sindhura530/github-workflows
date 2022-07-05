@@ -11,8 +11,7 @@ jobs:
      needs: inputs
      if: "contains(needs.inputs.outputs.buildTool, 'maven')"
      uses: sindhura530/github-workflows/.github/workflows/maven.yml@feature  
-     with:
-        dockerImage: ubuntu
+   
    
         
   check1:
