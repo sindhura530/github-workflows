@@ -71,7 +71,7 @@ jobs:
       name: Development 
       url: sindhura530/github-workflows@feature
     steps:
-      - name: deploying into feature branch
+      - name: deploying 
         run: |
              echo " **************************************** "
              echo " dev deployment Finished: SUCCESS "
