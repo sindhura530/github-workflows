@@ -7,14 +7,9 @@ jobs:
    job1:
       runs-on: ubuntu-latest
       container: 
-          image: ubuntu
+          image: node:14.16
       steps:
        - run: |
-          echo This job does specify a container.
-            echo It runs in the container instead of the VM.
-            apt-get update
-            apt-get install curl -y
-            curl --version
-            apt-get install nodejs npm -y
+            node --version
             npm --version
       
