@@ -7,7 +7,7 @@ jobs:
    job1:
       runs-on: ubuntu-latest
       container: 
-          image: ubuntu       
+          image: openjdk11-node10     
       steps:
        - run: |
             touch file1.txt
