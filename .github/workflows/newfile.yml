@@ -7,7 +7,7 @@ jobs:
    job1:
       runs-on: ubuntu-latest
       container: 
-          image: openjdk
+          image: openjdk-node
   
       steps:
        - run: |
