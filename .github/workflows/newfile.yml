@@ -1,0 +1,20 @@
+name: check
+on:
+  push:
+    branches: [feature]
+
+jobs:
+   job1:
+      runs-on: ubuntu-latest
+      container: 
+          image: ubuntu       
+      steps:
+       - run: |
+            touch file1.txt
+            echo 'chaithra' > file1.txt
+  
+       - name: upload artifact
+         uses: actions/upload-artifact@v3
+         with:
+            name: artifact1
+            path: ./
