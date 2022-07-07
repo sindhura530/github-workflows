@@ -8,6 +8,9 @@ jobs:
       runs-on: ubuntu-latest
       container: 
           image: openjdk-node
+          credentials:
+            username: ${{ github.actor }}
+            password: ${{ secrets.github_token }}
   
       steps:
        - run: |
