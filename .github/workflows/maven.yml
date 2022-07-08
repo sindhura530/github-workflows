@@ -10,8 +10,8 @@ on:
 
 jobs:
   build1:
-    if: ${{ inputs.javaVersion }}
-    #if: "contains(github.event.inputs.javaVersion, '11')"
+    #if: ${{ inputs.javaVersion }}
+    if: "contains(github.event.${{ inputs.javaVersion }}, '11')"
     runs-on: ubuntu-latest
     container: 
       image: openjdk:11
@@ -33,8 +33,7 @@ jobs:
           
           
   build2:
-    if: ${{ inputs.javaVersion }}
-    #if: "contains(javaVersion, '12')"
+    if: "contains(github.event.${{ inputs.javaVersion }}, '12')"
     runs-on: ubuntu-latest
     container: 
       image: openjdk:12
