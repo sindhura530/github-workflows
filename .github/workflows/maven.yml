@@ -3,31 +3,45 @@ name: Java CI with Maven
 on: workflow_call
 
 jobs:
-  build:
-    strategy:
-      matrix:
-        #os: [ubuntu-latest, macOS-latest, windows-latest]
-        java: [8, 9, 11]
-        
-    #runs-on: ${{ matrix.os }}
+  build1:
+    if: "contains(javaVersion, '11')"
     runs-on: ubuntu-latest
     container: 
-      image: openjdk:${{ matrix.java }}
-        
+      image: openjdk:11
+
     steps:
-      - uses: actions/checkout@v2    
-      - if: matrix.java == '11'
-        run: |
+    - name: Check-out project
+      uses: actions/checkout@v1
+    - name: install dependencies
+      run: |
           mkdir artifact 
           cd artifact
           echo " mvn --batch-mode --update-snapshots package" > target.jar
           cd ..
-      - name: upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-            name: artifact1
-            path: ./
+    - name: upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+          name: artifact1
+          path: ./
+          
+          
+  build2:
+    if: "contains(javaVersion, '12')"
+    runs-on: ubuntu-latest
+    container: 
+      image: openjdk:12
 
-      - if: matrix.java == '9'
-        run: |
-          echo " mvn --batch-mode --update-snapshots package"
+    steps:
+    - name: Check-out project
+      uses: actions/checkout@v1
+    - name: install dependencies
+      run: |
+          mkdir artifact 
+          cd artifact
+          echo " mvn --batch-mode --update-snapshots package" > target.jar
+          cd ..
+    - name: upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+          name: artifact2
+          path: ./
