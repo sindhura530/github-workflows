@@ -39,7 +39,7 @@ jobs:
        - name: Download artifacts
          uses: actions/download-artifact@v2
          with:
-           name: artifactfile
+           name: artifact1
            
           
   security-scan:
