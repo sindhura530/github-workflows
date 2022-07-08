@@ -28,6 +28,9 @@ jobs:
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     needs: [check, check1]
     runs-on: ubuntu-latest
+    container: 
+      image: openjdk:11
+
     steps:
        - uses: actions/checkout@v3
        - name: code Analysis
