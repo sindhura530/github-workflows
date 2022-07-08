@@ -33,7 +33,8 @@ jobs:
           
           
   build2:
-    if: "contains(javaVersion, '12')"
+    if: ${{ inputs.javaVersion }}
+    #if: "contains(javaVersion, '12')"
     runs-on: ubuntu-latest
     container: 
       image: openjdk:12
