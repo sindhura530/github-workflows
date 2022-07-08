@@ -1,10 +1,16 @@
 name: Java CI with Maven
 
-on: workflow_call
+on: 
+  workflow_call:
+    inputs:
+      javaVersion:
+           type: string
+           required: true
+    
 
 jobs:
   build1:
-    #if: "contains(javaVersion, '11')"
+    if: "contains(javaVersion, '11')"
     runs-on: ubuntu-latest
     container: 
       image: openjdk:11
@@ -26,7 +32,7 @@ jobs:
           
           
   build2:
-    #if: "contains(javaVersion, '12')"
+    if: "contains(javaVersion, '12')"
     runs-on: ubuntu-latest
     container: 
       image: openjdk:12
