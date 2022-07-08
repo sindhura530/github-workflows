@@ -9,7 +9,7 @@ on:
     
 
 jobs:
-  build1:
+  java11:
     #if: ${{ inputs.javaVersion }}
     #if: ${{ inputs.TRIGGER_EVENT == 'pull_request' }}
     if: ${{ inputs.javaVersion == '11' }}
@@ -33,7 +33,7 @@ jobs:
           path: ./
           
           
-  build2:
+  java12:
     #if: "contains(github.event.${{ inputs.javaVersion }}, '12')"
     if: ${{ inputs.javaVersion == '12' }}
     runs-on: ubuntu-latest
