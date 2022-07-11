@@ -8,13 +8,14 @@ jobs:
   inputs:
      uses: sindhura530/github-workflows/.github/workflows/pipelineConfig.yml@feature
      
-  check:
+  check_maven:
      needs: inputs
      if: "contains(needs.inputs.outputs.buildTool, 'maven') && contains(needs.inputs.outputs.language, 'java')"
      uses: sindhura530/github-workflows/.github/workflows/maven.yml@feature  
      with:
        javaVersion: '12'
-  check1:
+       
+  check_npm:
     needs: inputs
     if: "contains(needs.inputs.outputs.buildTool, 'npm') && contains(needs.inputs.outputs.language, 'java') && contains(needs.inputs.outputs.javaVersion, 1.8)"
     uses: sindhura530/github-workflows/.github/workflows/npm.yml@feature
@@ -27,7 +28,7 @@ jobs:
 
   Code-Quality:
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
-    needs: [check, check1]
+    needs: [check_maven, check_npm]
     runs-on: ubuntu-latest
     container: 
       image: openjdk:11
@@ -107,7 +108,7 @@ jobs:
           body:
             PR creation
           token: ${{ secrets.GITHUB_TOKEN }}
-          delete-branch: true
+          
           
   Deploy_Stage:
     if: ${{ always() && github.event.ref == 'refs/heads/develop' }}
@@ -143,7 +144,7 @@ jobs:
           body:
             PR creation
           token: ${{ secrets.GITHUB_TOKEN }}
-          delete-branch: true
+         
           
   Deploy_PROD:
     if: ${{ always() && github.event.ref == 'refs/heads/main' }}
