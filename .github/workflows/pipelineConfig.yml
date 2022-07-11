@@ -34,7 +34,7 @@ jobs:
       - id: step2
         run: echo "::set-output name=language::'java'" 
       - id: step3
-        run: echo "::set-output name=javaVersion::1.8"
+        run: echo "::set-output name=javaVersion::12"
       - id: step4
         run: echo "::set-output name=buildTool::'maven'" 
       - id: step5
