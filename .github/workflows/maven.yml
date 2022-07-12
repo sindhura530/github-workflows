@@ -12,12 +12,12 @@ on:
     
 
 jobs:
-  java11:
-    #if: ${{ inputs.javaVersion }}
-    #if: ${{ inputs.TRIGGER_EVENT == 'pull_request' }}
-    if: ${{ inputs.javaVersion == '11' }} && ${{ inputs.nodeVersion == '14' }}
+  java11-node14:
+   
+    if: ${{ inputs.javaVersion == '11' }} || ${{ inputs.nodeVersion == '14' }}
     runs-on: ubuntu-latest
     container: 
+      #image: openjdk11-node14:v1.0
       image: openjdk:11
 
     steps:
