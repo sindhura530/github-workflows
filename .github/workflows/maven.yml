@@ -6,13 +6,16 @@ on:
       javaVersion:
            type: string
            required: true
+      nodeVersion:
+           type: string
+           required: true
     
 
 jobs:
   java11:
     #if: ${{ inputs.javaVersion }}
     #if: ${{ inputs.TRIGGER_EVENT == 'pull_request' }}
-    if: ${{ inputs.javaVersion == '11' }}
+    if: ${{ inputs.javaVersion == '11' }} && ${{ inputs.nodeVersion == '14' }}
     runs-on: ubuntu-latest
     container: 
       image: openjdk:11
