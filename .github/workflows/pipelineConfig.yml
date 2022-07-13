@@ -6,9 +6,9 @@ on:
             value: ${{ jobs.example_job.outputs.output1 }}
          language:
             value: ${{ jobs.example_job.outputs.output2 }}
-         javaVersion:
-            value: ${{ jobs.example_job.outputs.output3 }}
          nodeVersion:
+            value: ${{ jobs.example_job.outputs.output3 }}
+         angularVersion:
             value: ${{ jobs.example_job.outputs.output4 }}
          buildTool: 
             value: ${{ jobs.example_job.outputs.output5 }}
@@ -25,8 +25,8 @@ jobs:
     outputs:
       output1: ${{ steps.step1.outputs.pipelinetype }}
       output2: ${{ steps.step2.outputs.language }}
-      output3: ${{ steps.step3.outputs.javaVersion }}
-      output4: ${{ steps.step3.outputs.nodeVersion }}
+      output3: ${{ steps.step3.outputs.nodeVersion }}
+      output4: ${{ steps.step3.outputs.angularVersion }}
       output5: ${{ steps.step4.outputs.buildTool }}
       output6: ${{ steps.step5.outputs.appName }}
       output7: ${{ steps.step6.outputs.NewJarFileName }}
