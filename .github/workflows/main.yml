@@ -16,7 +16,7 @@ jobs:
      uses: sindhura530/github-workflows/.github/workflows/java_node.yml@main 
      with:
        javaVersion: ${{ needs.inputs.outputs.javaVersion }}
-       nodeVersion: '18'
+       nodeVersion: ${{ needs.inputs.outputs.nodeVersion }}
        
   check_NodeAngular:
      needs: inputs
