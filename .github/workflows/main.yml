@@ -15,8 +15,8 @@ jobs:
      if: "contains(needs.inputs.outputs.buildTool, 'maven') && contains(needs.inputs.outputs.language, 'java')"
      uses: sindhura530/github-workflows/.github/workflows/java_node.yml@main 
      with:
-       javaVersion: '17'
-       nodeVersion: '14'
+       javaVersion: ${{ needs.inputs.outputs.javaVersion }}
+       nodeVersion: '18'
        
   check_NodeAngular:
      needs: inputs
