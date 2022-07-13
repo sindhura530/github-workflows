@@ -12,16 +12,12 @@ jobs:
      
   check_maven:
      needs: inputs
-     #if: "contains(needs.inputs.outputs.buildTool, 'maven') && contains(needs.inputs.outputs.language, 'java')"
-     uses: sindhura530/github-workflows/.github/workflows/maven.yml@main 
+     if: "contains(needs.inputs.outputs.buildTool, 'maven') && contains(needs.inputs.outputs.language, 'java')"
+     uses: sindhura530/github-workflows/.github/workflows/java_node.yml@main 
      with:
-       javaVersion: '12'
-       nodeVersion: '18'
-       buildTool: 'maven'
-       language: 'java'
-       
- 
-       
+       javaVersion: '17'
+       nodeVersion: '14'
+        
 
   Code-Quality:
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
