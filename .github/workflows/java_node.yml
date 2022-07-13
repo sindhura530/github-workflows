@@ -4,17 +4,17 @@ on:
   workflow_call:
     inputs:
       javaVersion:
-           type: string
+           type: number
            required: true
       nodeVersion:
-           type: string
+           type: number
            required: true
     
 
 jobs:
   java11-node14:
    
-    if: ${{ (inputs.javaVersion == '11' ) && (inputs.nodeVersion == '14') }} 
+    if: ${{ (inputs.javaVersion ==  11 ) && (inputs.nodeVersion == 14) }} 
     runs-on: ubuntu-latest
     container: 
       #image: openjdk11-node14:v1.0
@@ -39,7 +39,7 @@ jobs:
   java12-node18:
     
     #if: ${{ inputs.javaVersion == '12' }}
-    if: ${{ (inputs.javaVersion == '12' ) && (inputs.nodeVersion == '18') }} 
+    if: ${{ (inputs.javaVersion == 12 ) && (inputs.nodeVersion ==  18 ) }} 
     runs-on: ubuntu-latest
     container: 
       #image: openjdk12-node18:v1.0
@@ -63,7 +63,7 @@ jobs:
  
   java17-node14:
    
-    if: ${{ (inputs.javaVersion == '17' ) && (inputs.nodeVersion == '14') }} 
+    if: ${{ (inputs.javaVersion ==  17 ) && (inputs.nodeVersion == 14) }} 
     runs-on: ubuntu-latest
     container: 
       #image: openjdk17-node14:v1.0
