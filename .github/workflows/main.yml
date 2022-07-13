@@ -8,7 +8,7 @@ on:
   
 jobs:
   inputs:
-     uses: sindhura530/github-workflows/.github/workflows/pipelineConfig.yml@feature
+     uses: sindhura530/github-workflows/.github/workflows/pipelineConfig.yml@main
      
   check_javaNode:
      needs: inputs
