@@ -149,7 +149,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: Production
-      url: sindhura530/github-workflows@main
+      url: https://github.com/sindhura530/github-workflows@main
     steps:
       - name: deploying
         run: |
