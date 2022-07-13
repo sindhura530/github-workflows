@@ -35,13 +35,13 @@ jobs:
       - id: step1
         run: echo "::set-output name=pipelinetype::'azureappservice'"
       - id: step2
-        run: echo "::set-output name=language::'node'" 
+        run: echo "::set-output name=language::'java'" 
       - id: step3
         run: echo "::set-output name=javaVersion::12"
       - id: step4
         run: echo "::set-output name=nodeVersion::18"
       - id: step5
-        run: echo "::set-output name=buildTool::'npm'" 
+        run: echo "::set-output name=buildTool::'maven'" 
       - id: step6
         run: echo "::set-output name=appName::abc"
       - id: step7
