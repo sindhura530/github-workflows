@@ -4,24 +4,24 @@ on:
   workflow_call:
      inputs:
       nodeVersion:
-           type: string
+           type: number
            required: true
       angularVersion:
-           type: string
+           type: number
            required: true
            
            
 jobs:
   
   node12_angular12:
-    if: ${{ (inputs.nodeVersion == '12' ) && (inputs.angularVersion == '12') }} 
+    if: ${{ (inputs.nodeVersion == 12 ) && (inputs.angularVersion == 12) }} 
     runs-on: ubuntu-latest
     steps:
       - name: 'Testing'
         run: echo "working"
         
   node14_angular12:
-    if: ${{ (inputs.nodeVersion == '14' ) && (inputs.angularVersion == '12') }} 
+    if: ${{ (inputs.nodeVersion == 14 ) && (inputs.angularVersion == 12 ) }} 
     runs-on: ubuntu-latest
     steps:
       - name: 'Testing'
