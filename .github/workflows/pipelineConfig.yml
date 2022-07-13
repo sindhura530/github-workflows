@@ -8,14 +8,16 @@ on:
             value: ${{ jobs.example_job.outputs.output2 }}
          javaVersion:
             value: ${{ jobs.example_job.outputs.output3 }}
-         buildTool: 
+         nodeVersion:
             value: ${{ jobs.example_job.outputs.output4 }}
-         appName: 
+         buildTool: 
             value: ${{ jobs.example_job.outputs.output5 }}
-         NewJarFileName: 
+         appName: 
             value: ${{ jobs.example_job.outputs.output6 }}
-         TragetFileType: 
+         NewJarFileName: 
             value: ${{ jobs.example_job.outputs.output7 }}
+         TragetFileType: 
+            value: ${{ jobs.example_job.outputs.output8 }}
 jobs:
   example_job:
     name: Generate output
@@ -24,22 +26,25 @@ jobs:
       output1: ${{ steps.step1.outputs.pipelinetype }}
       output2: ${{ steps.step2.outputs.language }}
       output3: ${{ steps.step3.outputs.javaVersion }}
-      output4: ${{ steps.step4.outputs.buildTool }}
-      output5: ${{ steps.step5.outputs.appName }}
-      output6: ${{ steps.step6.outputs.NewJarFileName }}
-      output7: ${{ steps.step7.outputs.TragetFileType }}
+      output4: ${{ steps.step3.outputs.nodeVersion }}
+      output5: ${{ steps.step4.outputs.buildTool }}
+      output6: ${{ steps.step5.outputs.appName }}
+      output7: ${{ steps.step6.outputs.NewJarFileName }}
+      output8: ${{ steps.step7.outputs.TragetFileType }}
     steps:
       - id: step1
         run: echo "::set-output name=pipelinetype::'azureappservice'"
       - id: step2
-        run: echo "::set-output name=language::'node'" 
+        run: echo "::set-output name=language::'java'" 
       - id: step3
         run: echo "::set-output name=javaVersion::12"
       - id: step4
-        run: echo "::set-output name=buildTool::'npm'" 
+        run: echo "::set-output name=nodeVersion::18"
       - id: step5
-        run: echo "::set-output name=appName::abc"
+        run: echo "::set-output name=buildTool::'maven'" 
       - id: step6
-        run: echo "::set-output name=NewJarFileName::'app.jar'" 
+        run: echo "::set-output name=appName::abc"
       - id: step7
+        run: echo "::set-output name=NewJarFileName::'app.jar'" 
+      - id: step8
         run: echo "::set-output name=TargetFileType::'jar'"
