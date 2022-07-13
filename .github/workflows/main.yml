@@ -149,7 +149,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: Production
-      url: https://github.com/sindhura530/github-workflows@main
+      url: https://github.com/sindhura530/github-workflows/runs/7315627288?check_suite_focus=true
     steps:
       - name: deploying
         run: |
