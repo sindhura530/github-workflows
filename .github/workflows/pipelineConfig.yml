@@ -37,9 +37,9 @@ jobs:
       - id: step2
         run: echo "::set-output name=language::'node'" 
       - id: step3
-        run: echo "::set-output name=javaVersion::12"
+        run: echo "::set-output name=nodeVersion::12"
       - id: step4
-        run: echo "::set-output name=nodeVersion::18"
+        run: echo "::set-output name=angularVersion::12"
       - id: step5
         run: echo "::set-output name=buildTool::'npm'" 
       - id: step6
