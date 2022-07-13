@@ -36,11 +36,13 @@ jobs:
           path: ./
           
           
-  java12:
-    #if: "contains(github.event.${{ inputs.javaVersion }}, '12')"
-    if: ${{ inputs.javaVersion == '12' }}
+  java12-node18:
+    
+    #if: ${{ inputs.javaVersion == '12' }}
+    if: ${{ (inputs.javaVersion == '12' ) && (inputs.nodeVersion == '18') }} 
     runs-on: ubuntu-latest
     container: 
+      #image: openjdk12-node18:v1.0
       image: openjdk:12
 
     steps:
