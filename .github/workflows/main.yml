@@ -29,7 +29,7 @@ jobs:
 
   Code-Quality:
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
-    needs: [check_maven]
+    needs: [check_NodeAngular, check_javaNode ]
     runs-on: ubuntu-latest
     container: 
       image: openjdk:11
@@ -38,10 +38,6 @@ jobs:
        - uses: actions/checkout@v3
        - name: code Analysis
          run: echo 'mvn sonar:sonar'
-       - name: Download artifacts
-         uses: actions/download-artifact@v2
-         with:
-           name: artifact2
            
           
   security-scan:
