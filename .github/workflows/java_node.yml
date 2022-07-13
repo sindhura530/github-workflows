@@ -65,3 +65,19 @@ jobs:
       with:
           name: artifact2
           path: ./
+          
+ 
+  java17-node14:
+   
+    if: ${{ (inputs.javaVersion == '17' ) && (inputs.nodeVersion == '14') }} 
+    runs-on: ubuntu-latest
+    container: 
+      #image: openjdk17-node14:v1.0
+      image: openjdk:17
+
+    steps:
+    - name: print
+      run: echo "openjdk17-node14:v1.0"
+     
+      
+      
