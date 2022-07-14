@@ -28,8 +28,9 @@ jobs:
         
 
   Code-Quality:
-    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    #if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     needs: [check_NodeAngular, check_javaNode ]
+    #follows: [check_NodeAngular, check_javaNode ]
     runs-on: ubuntu-latest
     container: 
       image: openjdk:11
