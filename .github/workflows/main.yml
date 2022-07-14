@@ -23,8 +23,8 @@ jobs:
      if: "contains(needs.inputs.outputs.buildTool, 'npm') && contains(needs.inputs.outputs.language, 'node')"
      uses: sindhura530/github-workflows/.github/workflows/node_angular.yml@main 
      with:
-       nodeVersion: ${{ needs.pipelineConfig.outputs.nodeVersion }}
-       angularVersion: ${{ needs.pipelineConfig.outputs.angularVersion }}
+       nodeVersion: ${{ needs.inputs.outputs.nodeVersion }}
+       angularVersion: ${{ needs.inputs.outputs.angularVersion }}
         
 
   Code-Quality:
