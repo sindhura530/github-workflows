@@ -5,13 +5,13 @@ on:
          pipelineType:
             value: 'azureappservice'
          language:
-            value: 'node'
+            value: 'java'
+         javaVersion:
+            value: 17
          nodeVersion:
-            value: 12
-         angularVersion:
-            value: 12
+            value: 14
          buildTool: 
-            value: 'npm'
+            value: 'maven'
          appName: 
             value: abc
          NewJarFileName: 
