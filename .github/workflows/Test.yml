@@ -43,14 +43,12 @@ jobs:
     runs-on: ubuntu-latest
     env:
       resourceGroup: '11111'
-      staticwebappName: 'azapp-11111'
+      staticwebappName: 'awapp-11111'
       env: 'production'
     container: ubuntu
     continue-on-error: false
     steps:
       - name: Prod Deploy
-        if: (${{ env.resourceGroup == '11111' }} && 
-         ${{ env.staticwebappName == 'azapp-11111' }}) && 
-         ${{ env.env == 'prod' }} 
+        if: ( "${{ env.resourceGroup == '11111' }}" && "${{ env.staticwebappName == 'azapp-11111' }}" ) 
         continue-on-error: false
         run: echo "prod deploy"
