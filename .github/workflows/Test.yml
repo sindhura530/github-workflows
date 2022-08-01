@@ -21,4 +21,4 @@ jobs:
         continue-on-error: false
         shell: pwsh
         run: |
-          echo "${{ github.event.ref }} - ${env.ENV}"
+          echo "prod deploy"
