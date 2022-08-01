@@ -10,7 +10,7 @@ on:
 jobs:
   
   Dev_Deploy:
-    if: contains(github.ref, 'feature-')
+    if: contains(github.ref, 'feature-') || contains(github.ref, 'feature/')
     #if: github.event.ref == 'refs/heads/feature-*'
     runs-on: ubuntu-latest
     env:
