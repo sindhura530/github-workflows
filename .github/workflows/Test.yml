@@ -10,7 +10,7 @@ on:
 jobs:
   
   Dev_Deploy:
-    if: contains(github.ref, 'feature*')
+    if: contains(github.ref, 'feature-*')
     runs-on: ubuntu-latest
     env:
       resourceGroup: '11111'
