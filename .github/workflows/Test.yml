@@ -49,6 +49,7 @@ jobs:
     continue-on-error: false
     steps:
       - name: Prod Deploy
-        if: ( "${{ env.resourceGroup == '11111' }}" && "${{ env.staticwebappName == 'azapp-11111' }}" ) 
+        #if: "${{ needs.inputs.outputs.pipelineType == '' && needs.pipelineconfig.outputs.appName == '' }}"
+        if: "${{ env.resourceGroup == '11111'  &&  env.staticwebappName == 'azapp-11111' }}" 
         continue-on-error: false
         run: echo "prod deploy"
