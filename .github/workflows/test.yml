@@ -1,0 +1,56 @@
+name: Deployment
+on:
+  push:
+    branches:
+      - main
+      - 'feature-*'
+      - 'feature/*'
+      
+  workflow_dispatch:
+ 
+jobs:
+  
+  Dev_Deploy:
+    if: contains(github.ref, 'feature-') || contains(github.ref, 'feature/')
+    runs-on: ubuntu-latest
+    env:
+      resourceGroup: '11111'
+      staticwebappName: 'azapp-11111'
+      env: 'dev'
+    container: ubuntu
+    continue-on-error: false
+    steps:
+      - name: Dev Deploy
+        if: "${{ env.resourceGroup == '11111'  &&  env.staticwebappName == 'azapp-11111' &&  env.env == 'dev' }}"
+        continue-on-error: false
+        run: echo "Dev deploy"
+        
+  Stage_Deploy:
+    if: contains(github.ref, 'develop')
+    runs-on: ubuntu-latest
+    env:
+      resourceGroup: '11111'
+      staticwebappName: 'azapp-11111'
+      env: 'stage'
+    container: ubuntu
+    continue-on-error: false
+    steps:
+      - name: Dev Deploy
+        if: "${{ env.resourceGroup == '11111'  &&  env.staticwebappName == 'azapp-11111' &&  env.env == 'stage' }}" 
+        continue-on-error: false
+        run: echo "stage deploy"
+
+  Prod_Deploy:
+    if: contains(github.ref, 'main') || contains(github.ref, 'master')
+    runs-on: ubuntu-latest
+    env:
+      resourceGroup: '11111'
+      staticwebappName: 'azapp-11111'
+      env: 'production'
+    container: ubuntu
+    continue-on-error: false
+    steps:
+      - name: Prod Deploy
+        if: "${{ env.resourceGroup == '11111'  &&  env.staticwebappName == 'azapp-11111' &&  env.env == 'production' }}"  
+        continue-on-error: false
+        run: echo "prod deploy"
