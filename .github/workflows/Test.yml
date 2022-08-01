@@ -19,6 +19,4 @@ jobs:
          ${{ env.staticwebappName == 'azapp-11111' }} && 
          ${{ env.env == 'dev' }} 
         continue-on-error: false
-        shell: pwsh
-        run: |
-          echo "prod deploy"
+        run: echo "prod deploy"
