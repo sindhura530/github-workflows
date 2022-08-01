@@ -3,13 +3,22 @@ on:
  workflow_dispatch:
 
 jobs:
-  job1:
+
+  Prod_Deploy:
     runs-on: ubuntu-latest
     env:
       resourceGroup: '11111'
       staticwebappName: 'azapp-11111'
       env: 'dev'
+    container: ubuntu
+    continue-on-error: false
     steps:
-      - name: test
-        if: ${{ env.resourceGroup == '11111' }} && ${{ env.staticwebappName == 'azapp-11111' }} && ${{ env.env == 'dev' }} 
-        run: echo "dev"
+      - name: Dev Deploy
+        if: github.event.ref == 'refs/heads/main' &&
+         ${{ env.resourceGroup == '11111' }} && 
+         ${{ env.staticwebappName == 'azapp-11111' }} && 
+         ${{ env.env == 'dev' }} 
+        continue-on-error: false
+        shell: pwsh
+        run: |
+          echo "${{ github.event.ref }} - ${env.ENV}"
