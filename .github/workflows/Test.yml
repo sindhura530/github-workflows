@@ -1,4 +1,4 @@
-name: testing
+name: ci-${{ github.ref }}
 on:
   push:
     branches:
