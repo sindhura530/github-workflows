@@ -1,11 +1,14 @@
 name: testing
 on:
- workflow_dispatch:
-
+  push:
+    branches:
+      - main
+      - "feature/*"
+ 
 jobs:
   
   Dev_Deploy:
-    if: github.event.ref == 'refs/heads/feature' 
+    if: github.event.ref == 'refs/heads/feature/*' 
     runs-on: ubuntu-latest
     env:
       resourceGroup: '11111'
