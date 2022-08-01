@@ -3,14 +3,14 @@ on:
   push:
     branches:
       - main
-      - 'feature-*'
+      - 'feature-**'
       
   workflow_dispatch:
  
 jobs:
   
   Dev_Deploy:
-    if: github.event.ref == 'refs/heads/feature-*' 
+    if: github.event.ref == 'refs/heads/feature-**' 
     runs-on: ubuntu-latest
     env:
       resourceGroup: '11111'
@@ -20,7 +20,7 @@ jobs:
     continue-on-error: false
     steps:
       - name: Dev Deploy
-        if: "${{ env.resourceGroup == '11111'  &&  env.staticwebappName == 'azapp-11111' &&  env.env == 'dev' }}"
+        #if: "${{ env.resourceGroup == '11111'  &&  env.staticwebappName == 'azapp-11111' &&  env.env == 'dev' }}"
         continue-on-error: false
         run: echo "Dev deploy"
         
