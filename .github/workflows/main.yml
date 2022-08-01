@@ -1,7 +1,7 @@
 name: CI and CD pipeline
 on:
-  push: 
-     branches: [feature, develop, main]
+  #push: 
+     #branches: [feature, develop, main]
   pull_request: 
      branches: [feature, develop, main]
   
