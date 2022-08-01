@@ -1,4 +1,4 @@
-name: ci-${{ github.ref }}
+name: Deployment
 on:
   push:
     branches:
