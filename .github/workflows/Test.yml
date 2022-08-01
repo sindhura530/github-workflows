@@ -51,6 +51,6 @@ jobs:
       - name: Prod Deploy
         if: ${{ env.resourceGroup == '11111' }} && 
          ${{ env.staticwebappName == 'azapp-11111' }} && 
-         ${{ env.env == 'production' }} 
+         ${{ env.env == 'prod' }} 
         continue-on-error: false
         run: echo "prod deploy"
