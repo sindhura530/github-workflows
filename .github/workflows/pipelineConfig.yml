@@ -35,18 +35,18 @@ on:
          changeNumber:
             value: "CHG1234567"
             
-         environments.dev.resourceGroup:
+         DEV_resourceGroup:
            value: "ab-1111-a-"
-         environments.dev.staticwebappName: 
+         DEV_staticwebappName: 
            value: "aaaaa-12341-c-000"
-         environments.dev.env:
+         DEV_env:
            value: "dev"
            
-         env_dev-test_resourceGroup: 
+         STAGE_resourceGroup: 
              value: "rg-11111-d-000"
-         env_dev-test_staticwebappName: 
+         STAGE_staticwebappName: 
             value: "azapp-11119-d-000"
-         env_dev-test.env: 
+         STAGE_env: 
             value: "dev-test"  
             
          PROD_resourceGroup: 
