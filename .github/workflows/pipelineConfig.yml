@@ -1,7 +1,9 @@
 name: pipelineConfig
 on:
   workflow_call:
+  
       outputs:
+      
          pipelineType:
             value: "azstaticwebapp"
          language:
@@ -14,6 +16,7 @@ on:
             value: "abc"
          package: 
             value: true
+            
          Files_or_folders_To_zip: 
             value: "[build,package.json]"
          deploymentFolderName: 
@@ -24,9 +27,9 @@ on:
          Deployment_image_name: 
             value: "stellantis-harbor.artifactory.intra.fcagroup.com/azure-swa:v1.0.0"
             
-         rtDownload.AppKeys: 
+         rtDownload_AppKeys: 
             value: "12149-SP.zip"
-         rtDownload.AppArtficat:
+         rtDownload_AppArtficat:
              value: ""
             
          changeNumber:
@@ -39,11 +42,11 @@ on:
          environments.dev.env:
            value: "dev"
            
-         environments.dev-test.resourceGroup: 
+         env_dev-test_resourceGroup: 
              value: "rg-11111-d-000"
-         environments.dev-test.staticwebappName: 
+         env_dev-test_staticwebappName: 
             value: "azapp-11119-d-000"
-         environments.dev-test.env: 
+         env_dev-test.env: 
             value: "dev-test"  
             
          PROD_resourceGroup: 
