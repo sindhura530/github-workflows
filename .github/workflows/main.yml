@@ -158,6 +158,6 @@ jobs:
     steps:
       - name: deploying
         run: |
-             echo " **************************************** "
-             echo " prod deployment Finished: SUCCESS "
-             echo " **************************************** "
+             echo "$resourceGroup"
+             echo "$staticwebappName"
+             echo "$env"
