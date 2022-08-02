@@ -1,43 +1,21 @@
-#This parameter identifies the pipeline type application will use
-#Supported Values: "java"; "kubernetes";"azureappservice","azstaticwebapp"
-pipelineType: "azstaticwebapp"
-#For pipeline types of kubernetes and azureappservice, we need to understand which languauge application is using for development
-language: ""
-#Build tool information; Supported values: "maven","npm"
-buildTool: "npm"
-appName: "smdn-private-offers-rules-configurator-staticwebapp-12149"
-#package value set to true then only Files_or_folders_To_zip items will be zipped
-package: true
-Files_or_folders_To_zip: ["build"]
-ArchiveFilePath: "build"
-ZipFileName: "build"
-TargetFileType: "zip"
-deploymentFolderName: "build"
-#[mandatory]Artifacts path to upload. Devops team will fill the details
-rtTargetpath: "FCA-Artifacts"
-
-rtDownload: 
-    AppKeys: "12149-SP.zip"
-    AppArtficat: ""
-environments:
-  dev:
-      resourceGroup: "rg-12149-d-006"
-      staticwebappName: "azapp-12149-d-006"
-      env: "dev"
-  dev-test:
-      resourceGroup: "rg-12149-d-006"
-      staticwebappName: "azapp-12149-d-006"
-      env: "test"
-  dev-prod:
-      resourceGroup: "rg-12149-d-006"
-      staticwebappName: "azapp-12149-d-006"
-      env: "production"    
-  prod:
-      resourceGroup: "rg-12149-p-006"
-      staticwebappName: "azapp-12149-p-006"
-      env: "production"
-      
-
-#Change request number to be used for production launch; mandatory for develop branch pull request
-changeNumber: "CHG0615418"
-emailRecipients: ""
+name: pipelineConfig
+on:
+  workflow_call:
+  
+jobs:
+  
+  test:
+    runs-on: ubuntu-latest
+    steps:
+       - name: Input values
+         run: |
+           declare -A array
+           array=( [pipelineType]="${{ needs.pipelineconfig.outputs.pipelineType }}"  
+                   [language]="${{ needs.pipelineconfig.outputs.language }}" 
+                   [nodeVersion]="${{ needs.pipelineconfig.outputs.nodeVersion }}"
+                   [buildTool]="${{ needs.pipelineconfig.outputs.buildTool }}"
+                   [BUILD_image_name]="${{ needs.pipelineconfig.outputs.BUILD_image_name }}"
+                   [Deployment_image_name]="${{ needs.pipelineconfig.outputs.Deployment_image_name }}"
+                   [appName]="${{ needs.pipelineconfig.outputs.appName }}" )
+                   
+          
