@@ -51,9 +51,9 @@ jobs:
     if: contains(github.ref, 'main') || contains(github.ref, 'master')
     runs-on: ubuntu-latest
     env:
-      resourceGroup: "${{ needs.inputs.outputs.environments.prod.resourceGroup }}"
-      staticwebappName: "${{ needs.inputs.outputs.environments.prod.staticwebappName }}"
-      env: "${{ needs.inputs.outputs.environments.prod.env }}"
+      RESOURCE_GROUP: ${{ needs.inputs.outputs.environments.prod.resourceGroup }}
+      STATIC_WEBAPP_NAME: "${{ needs.inputs.outputs.environments.prod.staticwebappName }}"
+      ENV: "${{ needs.inputs.outputs.environments.prod.env }}"
     container: ubuntu
     continue-on-error: false
     steps:
@@ -61,5 +61,6 @@ jobs:
         #if: "${{ env.resourceGroup == '11111'  &&  env.staticwebappName == 'azapp-11111' &&  env.env == 'production' }}"  
         continue-on-error: false
         run: |
-             echo "$resourceGroup"
-             echo "${{ env.resourceGroup}}"
+             echo "$RESOURCE_GROUP"
+             echo "$STATIC_WEBAPP_NAME"
+             echo "${{ env.RESOURCE_GROUP}}"
