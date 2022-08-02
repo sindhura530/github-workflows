@@ -43,12 +43,7 @@ env:
     staticwebappName: "azapp-12149-d-006"
     env: "dev"
   
-matrix:
-  package:
-    # list your packages here
-    - coding-standard
-    - phpstan-rules
-+   - easy-coding-standard
+
 
 
   
