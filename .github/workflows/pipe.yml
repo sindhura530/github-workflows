@@ -1,22 +1,66 @@
-name: Inputs
+name: pipelineConfig
 on:
   workflow_call:
   workflow_dispatch:
   
-jobs:
+      outputs:
+      
+         pipelineType:
+            value: "azstaticwebapp"
+         language:
+            value: "nodejs"
+         nodeVersion:
+            value: 16
+         buildTool: 
+            value: "npm"
+         appName: 
+            value: "abc"
+         package: 
+            value: true
+            
+         Files_or_folders_To_zip: 
+            value: "[build,package.json]"
+         deploymentFolderName: 
+            value: "build"
+            
+         BUILD_image_name: 
+            value: "stellantis-harbor.artifactory.intra.fcagroup.com/nodejs16-lts:v1.0.0"
+         Deployment_image_name: 
+            value: "stellantis-harbor.artifactory.intra.fcagroup.com/azure-swa:v1.0.0"
+            
+         rtDownload_AppKeys: 
+            value: "12149-SP.zip"
+         rtDownload_AppArtficat:
+             value: ""
+            
+         changeNumber:
+            value: "CHG1234567"
+            
+        
+env:
+  dev:
+    resourceGroup: "rg-12149-d-006"
+    staticwebappName: "azapp-12149-d-006"
+    env: "dev"
   
-  test:
-    runs-on: ubuntu-latest
+matrix:
+  package:
+    # list your packages here
+    - coding-standard
+    - phpstan-rules
++   - easy-coding-standard
+
+
+  
+                     
+jobs:
+  Dev_Environments:
+    runs-on: [ ubuntu-latest]
     steps:
-       - name: Input values
-         run: |
-           declare -A array
-           array=( [pipelineType] = "azstaticwebapp" 
-                   [language] = "node" 
-                   [nodeVersion] ="16"
-                   [buildTool] = "npm"
-                   [BUILD_image_name] = "node:16"
-                   [Deployment_image_name] = "node:16"
-                   [appName] = "abcccddd" )
-                   
-          
+      - name: printing
+        run: echo " print"
+        env:
+          resourceGroup: "rg-12149-d-006"
+          staticwebappName: "azapp-12149-d-006"
+          env: "dev"
+        
