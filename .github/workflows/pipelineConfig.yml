@@ -3,25 +3,59 @@ on:
   workflow_call:
       outputs:
          pipelineType:
-            value: 'azureappservice'
+            value: "azstaticwebapp"
          language:
-            value: 'java'
-         javaVersion:
-            value: 17
+            value: "nodejs"
          nodeVersion:
-            value: 14
+            value: 16
          buildTool: 
-            value: 'maven'
+            value: "npm"
          appName: 
-            value: abc
-         NewJarFileName: 
-            value: 'app.jar'
-         TragetFileType: 
-            value: 'jar'
+            value: "abc"
+         package: 
+            value: true
+         Files_or_folders_To_zip: 
+            value: "[build,package.json]"
+         deploymentFolderName: 
+            value: "build"
+            
+         BUILD_image_name: 
+            value: "stellantis-harbor.artifactory.intra.fcagroup.com/nodejs16-lts:v1.0.0"
+         Deployment_image_name: 
+            value: "stellantis-harbor.artifactory.intra.fcagroup.com/azure-swa:v1.0.0"
+            
+         rtDownload.AppKeys: 
+            value: "12149-SP.zip"
+         rtDownload.AppArtficat:
+             value: ""
+            
+         changeNumber:
+            value: "CHG1234567"
+            
+         environments.dev.resourceGroup:
+           value: "ab-1111-a-"
+         environments.dev.staticwebappName: 
+           value: "aaaaa-12341-c-000"
+         environments.dev.env:
+           value: "dev"
+           
+         environments.dev-test.resourceGroup: 
+             value: "rg-11111-d-000"
+         environments.dev-test.staticwebappName: 
+            value: "azapp-11119-d-000"
+         environments.dev-test.env: 
+            value: "dev-test"  
+            
+         environments.prod.resourceGroup: 
+            value: "rg-11111-d-001"
+         environments.prod.staticwebappName: 
+            value: "azapp-11111-d-000"
+         environments.prod.env: 
+            value: "prodcution"   
+                     
 jobs:
   example_job:
-    name: Generate output
-    runs-on: ubuntu-latest
+    runs-on: [ self-hosted ]
     steps:
       - name: printing
         run: echo " print"
