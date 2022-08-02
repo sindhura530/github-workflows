@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RESOURCE_GROUP: ${{ needs.inputs.outputs.resourceGroup }}
-      STATIC_WEBAPP_NAME: "${{ needs.inputs.outputs.environments.prod.staticwebappName }}"
+      STATIC_WEBAPP_NAME: "${{ needs.inputs.outputs.prod.staticwebappName }}"
       ENV: "${{ needs.inputs.outputs.environments.prod.env }}"
     container: ubuntu
     continue-on-error: false
@@ -64,4 +64,4 @@ jobs:
              echo "1: $RESOURCE_GROUP"
              echo "2: $STATIC_WEBAPP_NAME"
              echo "3: ${{ env.RESOURCE_GROUP}}"
-             echo "4: ${{ needs.pipelineconfig.outputs.pipelineType }}"
+            
