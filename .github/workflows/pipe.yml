@@ -1,7 +1,6 @@
-name: inputs
+name: pipelineInputs
 on:
   workflow_call:
-  workflow_dispatch:
   
       outputs:
       
@@ -32,16 +31,6 @@ on:
             value: "12149-SP.zip"
          rtDownload_AppArtficat:
              value: ""
-            
-         changeNumber:
-            value: "CHG1234567"
-            
-        
-env:
-  dev:
-    resourceGroup: "rg-12149-d-006"
-    staticwebappName: "azapp-12149-d-006"
-    env: "dev"
   
 
 
