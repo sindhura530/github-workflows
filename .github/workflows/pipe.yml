@@ -1,6 +1,7 @@
-name: pipelineConfig
+name: Inputs
 on:
   workflow_call:
+  workflow_dispatch:
   
 jobs:
   
@@ -10,12 +11,12 @@ jobs:
        - name: Input values
          run: |
            declare -A array
-           array=( [pipelineType]="${{ needs.pipelineconfig.outputs.pipelineType }}"  
-                   [language]="${{ needs.pipelineconfig.outputs.language }}" 
-                   [nodeVersion]="${{ needs.pipelineconfig.outputs.nodeVersion }}"
-                   [buildTool]="${{ needs.pipelineconfig.outputs.buildTool }}"
-                   [BUILD_image_name]="${{ needs.pipelineconfig.outputs.BUILD_image_name }}"
-                   [Deployment_image_name]="${{ needs.pipelineconfig.outputs.Deployment_image_name }}"
-                   [appName]="${{ needs.pipelineconfig.outputs.appName }}" )
+           array=( [pipelineType] = "azstaticwebapp" 
+                   [language] = "node" 
+                   [nodeVersion] ="16"
+                   [buildTool] = "npm"
+                   [BUILD_image_name] = "node:16"
+                   [Deployment_image_name] = "node:16"
+                   [appName] = "abcccddd" )
                    
           
