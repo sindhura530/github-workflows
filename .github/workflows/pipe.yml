@@ -2,6 +2,7 @@ name: pipelineInputs
 on:
   workflow_call:
   
+  
       outputs:
       
          pipelineType:
@@ -32,19 +33,26 @@ on:
          rtDownload_AppArtficat:
              value: ""
   
-
-
-
   
-                     
 jobs:
-  Dev_Environments:
+
+  Environments:
     runs-on: [ ubuntu-latest]
     steps:
-      - name: printing
-        run: echo " print"
+      - name: Dev Environment
         env:
-          resourceGroup: "rg-12149-d-006"
-          staticwebappName: "azapp-12149-d-006"
-          env: "dev"
+          DEV_resourceGroup: "rg-12149-d-006"
+          DEV_staticwebappName: "azapp-12149-d-006"
+          DEV_env: "dev"
+      - name: Stage Environment
+        env:
+          STAGE_resourceGroup: "rg-12149-d-006"
+          STAGE_staticwebappName: "azapp-12149-d-006"
+          STAGE_env: "stage"
+      - name: Prod Environment
+        env:
+          PROD_resourceGroup: "rg-12149-d-006"
+          PROD_staticwebappName: "azapp-12149-d-006"
+          PROD_env: "stage"
+    
         
