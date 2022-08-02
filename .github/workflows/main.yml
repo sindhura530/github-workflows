@@ -146,11 +146,14 @@ jobs:
           
   Deploy_PROD:
     if: ${{ always() && github.event.ref == 'refs/heads/main' }}
-    needs: [ChangeRequest_Validation]
+    needs: [ChangeRequest_Validation, ]
     runs-on: ubuntu-latest
+    env:
+      resourceGroup: "${{ needs.inputs.outputs.environments.prod.resourceGroup }}" 
+      staticwebappName: "${{ needs.inputs.outputs.environments.prod.staticwebappName }}" 
+      env: "${{ needs.inputs.outputs.environments.prod.env }}"
     environment: 
       name: Production
-      url: https://github.com/sindhura530/github-workflows/runs/7315627288?check_suite_focus=true
     steps:
       - name: deploying
         run: |
