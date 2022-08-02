@@ -52,17 +52,17 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RESOURCE_GROUP: ${{ needs.inputs.outputs.PROD_resourceGroup }}
-      STATIC_WEBAPP_NAME: "${{ needs.inputs.outputs.PROD_staticwebappName }}"
-      ENV: "${{ needs.inputs.outputs.PROD_Env }}"
+      STATIC_WEBAPP_NAME: ${{ needs.inputs.outputs.PROD_staticwebappName }}
+      ENV: ${{ needs.inputs.outputs.PROD_Env }}
     container: ubuntu
     continue-on-error: false
+    
     steps:
-      - name: Prod Deploy
-        #if: "${{ env.resourceGroup == '11111'  &&  env.staticwebappName == 'azapp-11111' &&  env.env == 'production' }}"  
+      - name: Prod Deploy 
         continue-on-error: false
         run: |
              echo "1: $RESOURCE_GROUP"
              echo "2: $STATIC_WEBAPP_NAME"
              echo "3: $ENV"
-             echo "4: ${{ env.RESOURCE_GROUP}}"
+             #echo "4: ${{ env.RESOURCE_GROUP}}"
             
