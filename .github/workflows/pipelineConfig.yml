@@ -48,7 +48,7 @@ on:
             
          resourceGroup: 
             value: "rg-11111-d-001"
-         environments.prod.staticwebappName: 
+         prod.staticwebappName: 
             value: "azapp-11111-d-000"
          environments.prod.env: 
             value: "prodcution"   
