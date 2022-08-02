@@ -10,8 +10,13 @@ on:
  
 jobs:
   
+
+  inputs:
+     uses: sindhura530/github-workflows/.github/workflows/pipelineConfig.yml@main
+     
   Dev_Deploy:
     if: contains(github.ref, 'feature-') || contains(github.ref, 'feature/')
+    needs: inputs
     runs-on: ubuntu-latest
     env:
       resourceGroup: '11111'
@@ -26,6 +31,7 @@ jobs:
         run: echo "Dev deploy"
         
   Stage_Deploy:
+    needs: inputs
     if: contains(github.ref, 'develop')
     runs-on: ubuntu-latest
     env:
@@ -41,16 +47,18 @@ jobs:
         run: echo "stage deploy"
 
   Prod_Deploy:
+    needs: inputs
     if: contains(github.ref, 'main') || contains(github.ref, 'master')
     runs-on: ubuntu-latest
     env:
-      resourceGroup: '11111'
-      staticwebappName: 'azapp-11111'
-      env: 'production'
+      resourceGroup: ${{ needs.inputs.outputs.environments.prod.resourceGroup }} 
+      staticwebappName: ${{ needs.inputs.outputs.environments.prod.staticwebappName }}
+      env: ${{ needs.inputs.outputs.environments.prod.env }}
     container: ubuntu
     continue-on-error: false
     steps:
       - name: Prod Deploy
-        if: "${{ env.resourceGroup == '11111'  &&  env.staticwebappName == 'azapp-11111' &&  env.env == 'production' }}"  
+        #if: "${{ env.resourceGroup == '11111'  &&  env.staticwebappName == 'azapp-11111' &&  env.env == 'production' }}"  
         continue-on-error: false
-        run: echo "prod deploy"
+        run: |
+             echo "$resourceGroup"
