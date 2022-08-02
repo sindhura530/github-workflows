@@ -51,7 +51,7 @@ jobs:
     if: contains(github.ref, 'main') || contains(github.ref, 'master')
     runs-on: ubuntu-latest
     env:
-      RESOURCE_GROUP: ${{ needs.inputs.outputs.environments.prod.resourceGroup }}
+      RESOURCE_GROUP: ${{ needs.inputs.outputs.resourceGroup }}
       STATIC_WEBAPP_NAME: "${{ needs.inputs.outputs.environments.prod.staticwebappName }}"
       ENV: "${{ needs.inputs.outputs.environments.prod.env }}"
     container: ubuntu
@@ -64,3 +64,4 @@ jobs:
              echo "$RESOURCE_GROUP"
              echo "$STATIC_WEBAPP_NAME"
              echo "${{ env.RESOURCE_GROUP}}"
+             echo "${{ needs.pipelineconfig.outputs.pipelineType }}"
