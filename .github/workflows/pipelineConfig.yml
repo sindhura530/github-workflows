@@ -55,7 +55,7 @@ on:
                      
 jobs:
   example_job:
-    runs-on: [ self-hosted ]
+    runs-on: [ ubuntu-latest]
     steps:
       - name: printing
         run: echo " print"
