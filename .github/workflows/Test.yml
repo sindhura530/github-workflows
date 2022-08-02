@@ -51,9 +51,9 @@ jobs:
     if: contains(github.ref, 'main') || contains(github.ref, 'master')
     runs-on: ubuntu-latest
     env:
-      resourceGroup: ${{ needs.inputs.outputs.environments.prod.resourceGroup }} 
-      staticwebappName: ${{ needs.inputs.outputs.environments.prod.staticwebappName }}
-      env: ${{ needs.inputs.outputs.environments.prod.env }}
+      resourceGroup: "${{ needs.inputs.outputs.environments.prod.resourceGroup }}"
+      staticwebappName: "${{ needs.inputs.outputs.environments.prod.staticwebappName }}"
+      env: "${{ needs.inputs.outputs.environments.prod.env }}"
     container: ubuntu
     continue-on-error: false
     steps:
