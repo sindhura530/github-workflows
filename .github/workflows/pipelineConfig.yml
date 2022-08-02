@@ -48,9 +48,9 @@ on:
             
          resourceGroup: 
             value: "rg-11111-d-001"
-         prod.staticwebappName: 
+         prod_staticwebappName: 
             value: "azapp-11111-d-000"
-         environments.prod.env: 
+         prodEnv: 
             value: "prodcution"   
                      
 jobs:
