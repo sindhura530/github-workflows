@@ -46,7 +46,7 @@ on:
          environments.dev-test.env: 
             value: "dev-test"  
             
-         environments.prod.resourceGroup: 
+         resourceGroup: 
             value: "rg-11111-d-001"
          environments.prod.staticwebappName: 
             value: "azapp-11111-d-000"
