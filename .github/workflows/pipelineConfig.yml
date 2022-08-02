@@ -46,11 +46,11 @@ on:
          environments.dev-test.env: 
             value: "dev-test"  
             
-         resourceGroup: 
+         PROD_resourceGroup: 
             value: "rg-11111-d-001"
-         prod_staticwebappName: 
+         PROD_staticwebappName: 
             value: "azapp-11111-d-000"
-         prodEnv: 
+         PRODEnv: 
             value: "prodcution"   
                      
 jobs:
