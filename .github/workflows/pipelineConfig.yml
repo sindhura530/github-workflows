@@ -50,7 +50,7 @@ on:
             value: "rg-11111-d-001"
          PROD_staticwebappName: 
             value: "azapp-11111-d-000"
-         PRODEnv: 
+         PROD_Env: 
             value: "prodcution"   
                      
 jobs:
