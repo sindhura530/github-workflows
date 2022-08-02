@@ -62,3 +62,4 @@ jobs:
         continue-on-error: false
         run: |
              echo "$resourceGroup"
+             echo "${{ env.resourceGroup}}"
