@@ -1,3 +1,8 @@
+name: pipe
+on:
+  workflow_call:
+
+
 #This parameter identifies the pipeline type application will use
 #Supported Values: "java"; "kubernetes";"azureappservice","azstaticwebapp"
 pipelineType: "azstaticwebapp"
