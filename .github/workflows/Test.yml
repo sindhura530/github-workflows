@@ -70,7 +70,7 @@ jobs:
         
         run: |
             
-             pwsh -c 'invoke-webrequest -Uri "https://raw.githubusercontent.com/sindhura530/github-workflows/main/README.md" -OutFile "Publish.md"'
+             pwsh -command 'invoke-webrequest -Uri "https://raw.githubusercontent.com/sindhura530/github-workflows/main/README.md" -OutFile "Publish.md"'
              echo "1: $RESOURCE_GROUP"
              echo "2: $STATIC_WEBAPP_NAME"
              echo "3: $ENV"
