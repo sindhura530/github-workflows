@@ -70,7 +70,7 @@ jobs:
         
         run: |
              #shell: pwsh
-             command 'invoke-webrequest -Uri "https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.ps1" -OutFile "Publish.ps1"'
+             command 'invoke-webrequest -Uri "https://raw.githubusercontent.com/sindhura530/github-workflows/main/README.md" -OutFile "Publish.md"'
              echo "1: $RESOURCE_GROUP"
              echo "2: $STATIC_WEBAPP_NAME"
              echo "3: $ENV"
