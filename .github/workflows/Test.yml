@@ -7,6 +7,10 @@ on:
       - 'feature/*'
       
   workflow_dispatch:
+  
+defaults:
+  run:
+    shell: bash
  
 jobs:
   
@@ -63,7 +67,9 @@ jobs:
     steps:
       - name: Prod Deploy 
         continue-on-error: false
+        
         run: |
+             invoke-webrequest -Uri "https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.ps1" -OutFile "Publish.ps1"
              echo "1: $RESOURCE_GROUP"
              echo "2: $STATIC_WEBAPP_NAME"
              echo "3: $ENV"
