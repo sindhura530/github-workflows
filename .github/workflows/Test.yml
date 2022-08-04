@@ -12,17 +12,20 @@ on:
  
 jobs:
 
+  
+
+  
+  inputs:
+     uses: sindhura530/github-workflows/.github/workflows/pipelineConfig.yml@main
+     
   job1:
+    needs: inputs
     runs-on: ubuntu-latest
     defaults:
       run:
         shell: pwsh
     steps:
       - run: echo "sindhu"
-
-  
-  inputs:
-     uses: sindhura530/github-workflows/.github/workflows/pipelineConfig.yml@main
      
   Dev_Deploy:
     if: contains(github.ref, 'feature-') || contains(github.ref, 'feature/')
@@ -61,7 +64,7 @@ jobs:
              echo "3: $ENV"
 
   Prod_Deploy:
-    needs: inputs
+    needs: [ inputs, job1 ]
     if: contains(github.ref, 'main') || contains(github.ref, 'master')
     runs-on: ubuntu-latest
     env:
