@@ -10,7 +10,7 @@ on:
   
 defaults:
   run:
-    shell: bash
+    shell: pwsh
  
 jobs:
   
@@ -69,7 +69,7 @@ jobs:
         continue-on-error: false
         
         run: |
-             shell: bash
+             #shell: pwsh
              invoke-webrequest -Uri "https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.ps1" -OutFile "Publish.ps1"
              echo "1: $RESOURCE_GROUP"
              echo "2: $STATIC_WEBAPP_NAME"
