@@ -59,14 +59,14 @@ jobs:
     if: contains(github.ref, 'main') || contains(github.ref, 'master')
     runs-on: ubuntu-latest
     container: ubuntu
-    defaults:
-      run:
-        shell: pwsh
+    #defaults:
+     # run:
+        #shell: pwsh
     
     steps:
       - name: Prod Deploy1
-        run: Write-Host "no newline test1"
+        run:  pwsh -command 'Write-Host "no newline test1"'
       - name: Prod Deploy2
-        run: Write-Host "no newline test2"
+        run:  pwsh -command 'Write-Host "no newline test2"'
              
             
