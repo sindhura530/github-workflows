@@ -58,9 +58,12 @@ jobs:
     needs: [ inputs ]
     if: contains(github.ref, 'main') || contains(github.ref, 'master')
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: pwsh
     steps:
       - name: Install 
-        shell: pwsh
+        #shell: pwsh
         run: Write-Host "test1"
            
             
