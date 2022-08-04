@@ -9,8 +9,8 @@ on:
   workflow_dispatch:
   
 #defaults:
-  #run:
-    #shell: pwsh
+ # run:
+ #   shell: pwsh
  
 jobs:
   
@@ -69,8 +69,9 @@ jobs:
         continue-on-error: false
         
         run: |
-            
-             pwsh -command 'invoke-webrequest -Uri "https://raw.githubusercontent.com/sindhura530/github-workflows/main/README.md" -OutFile "Publish.md"'
+             #pwsh -command 'Invoke-WebRequest -Uri "https://raw.githubusercontent.com/chaithragudimalla/Project/main/.github/workflows/Dockerfile" -OutFile "Dockerfile"'
+             pwsh -command 'Invoke-Webrequest -Uri "https://raw.githubusercontent.com/sindhura530/github-workflows/main/README.md" -OutFile "Publish"'
+             pwsh -command Write-Host "no newline test"
              echo "1: $RESOURCE_GROUP"
              echo "2: $STATIC_WEBAPP_NAME"
              echo "3: $ENV"
