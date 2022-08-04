@@ -65,7 +65,8 @@ jobs:
     
     steps:
       - name: Prod Deploy1
-        run:  pwsh -command 'Write-Host "no newline test1"'
+        shell: pwsh
+        run: Write-Host "test1"
       - name: Prod Deploy2
         run:  pwsh -command 'Write-Host "no newline test2"'
              
