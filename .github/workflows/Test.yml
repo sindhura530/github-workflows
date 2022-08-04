@@ -62,8 +62,9 @@ jobs:
       run:
         shell: pwsh
     steps:
-      - name: Install 
-        #shell: pwsh
+      - name: Install 1
         run: Write-Host "test1"
+      - name: Install 2
+        run: Write-Host "test2"
            
             
