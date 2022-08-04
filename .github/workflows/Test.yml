@@ -8,6 +8,10 @@ on:
       
   workflow_dispatch:
   
+  
+defaults:
+  run:
+    shell: pwsh
 
  
 jobs:
@@ -58,9 +62,9 @@ jobs:
     needs: [ inputs ]
     if: contains(github.ref, 'main') || contains(github.ref, 'master')
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: pwsh
+    #defaults:
+      #run:
+        #shell: pwsh
     steps:
       - name: Install 1
         run: Write-Host "test1"
