@@ -8,11 +8,16 @@ on:
       
   workflow_dispatch:
   
-#defaults:
- # run:
- #   shell: pwsh
+
  
 jobs:
+
+  job1:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: pwsh
+
   
   inputs:
      uses: sindhura530/github-workflows/.github/workflows/pipelineConfig.yml@main
@@ -69,11 +74,8 @@ jobs:
         continue-on-error: false
         
         run: |
-             #pwsh -command 'Invoke-WebRequest -Uri "https://raw.githubusercontent.com/chaithragudimalla/Project/main/.github/workflows/Dockerfile" -OutFile "Dockerfile"'
-             pwsh -command 'Invoke-Webrequest -Uri "https://raw.githubusercontent.com/sindhura530/github-workflows/main/README.md" -OutFile "Publish"'
-             pwsh -command Write-Host "no newline test"
-             echo "1: $RESOURCE_GROUP"
-             echo "2: $STATIC_WEBAPP_NAME"
-             echo "3: $ENV"
-             #echo "4: ${{ env.RESOURCE_GROUP}}"
+             
+             #pwsh -command 'Invoke-Webrequest -Uri "https://raw.githubusercontent.com/sindhura530/github-workflows/main/README.md" -OutFile "Publish"'
+             Write-Host "no newline test"
+             
             
