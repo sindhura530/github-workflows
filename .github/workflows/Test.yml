@@ -58,16 +58,9 @@ jobs:
     needs: [ inputs ]
     if: contains(github.ref, 'main') || contains(github.ref, 'master')
     runs-on: ubuntu-latest
-    container: ubuntu
-    #defaults:
-     # run:
-        #shell: pwsh
-    
     steps:
-      - name: Prod Deploy1
+      - name: Install 
         shell: pwsh
         run: Write-Host "test1"
-      - name: Prod Deploy2
-        run:  pwsh -command 'Write-Host "no newline test2"'
-             
+           
             
