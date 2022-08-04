@@ -13,19 +13,10 @@ on:
 jobs:
 
   
-
-  
   inputs:
      uses: sindhura530/github-workflows/.github/workflows/pipelineConfig.yml@main
      
-  job1:
-    needs: inputs
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: pwsh
-    steps:
-      - run: echo "sindhu"
+  
      
   Dev_Deploy:
     if: contains(github.ref, 'feature-') || contains(github.ref, 'feature/')
@@ -64,23 +55,18 @@ jobs:
              echo "3: $ENV"
 
   Prod_Deploy:
-    needs: [ inputs, job1 ]
+    needs: [ inputs ]
     if: contains(github.ref, 'main') || contains(github.ref, 'master')
     runs-on: ubuntu-latest
-    env:
-      RESOURCE_GROUP: ${{ secrets.PROD_RESOURCEGROUP }}    
-      STATIC_WEBAPP_NAME: ${{ secrets.PROD_STATICWEBAPPNAME }}
-      ENV: ${{ secrets.PROD_ENV }}
     container: ubuntu
-    continue-on-error: false
+    defaults:
+      run:
+        shell: pwsh
     
     steps:
-      - name: Prod Deploy 
-        continue-on-error: false
-        
-        run: |
-             
-             #pwsh -command 'Invoke-Webrequest -Uri "https://raw.githubusercontent.com/sindhura530/github-workflows/main/README.md" -OutFile "Publish"'
-             Write-Host "no newline test"
+      - name: Prod Deploy1
+        run: Write-Host "no newline test1"
+      - name: Prod Deploy2
+        run: Write-Host "no newline test2"
              
             
