@@ -22,6 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy2
+        shell: pwsh
         run:  Invoke-Webrequest -Uri "https://raw.githubusercontent.com/sindhura530/github-workflows/main/README.md" -OutFile "Publish2"
         
   job3:
@@ -29,8 +30,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install 1
+        shell: pwsh
         run:  Write-Host "test2"
       - name: Install 2
+        shell: pwsh
         run: |
              mkdir sindhu
              cd sindhu
