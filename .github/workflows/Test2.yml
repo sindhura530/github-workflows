@@ -16,3 +16,23 @@ jobs:
       - name: Deploy
         shell: pwsh
         run: Write-Host "test1"
+        
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy2
+        run:  Invoke-Webrequest -Uri "https://raw.githubusercontent.com/sindhura530/github-workflows/main/README.md" -OutFile "Publish2"
+        
+  job3:
+    needs: [ job2 ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install 1
+        run:  Write-Host "test2"
+      - name: Install 2
+        run: |
+             mkdir sindhu
+             cd sindhu
+             Invoke-Webrequest -Uri "https://raw.githubusercontent.com/sindhura530/github-workflows/main/README.md" -OutFile "Publish3"
+             ls -l        
