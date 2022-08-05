@@ -12,7 +12,7 @@ on:
 defaults:
   run:
     shell: pwsh
-    working-directory: sindhu
+    #working-directory: sindhu
 
  
 jobs:
@@ -21,7 +21,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
-        run: Invoke-Webrequest -Uri "https://raw.githubusercontent.com/sindhura530/github-workflows/main/README.md" -OutFile "Publish"
+        run: |
+             echo "${{ github.event.repository.name }}"
+                  Invoke-Webrequest -Uri "https://raw.githubusercontent.com/sindhura530/github-workflows/main/README.md" -OutFile "Publish"
              
         
   job2:
