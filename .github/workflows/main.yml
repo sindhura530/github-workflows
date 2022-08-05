@@ -60,7 +60,7 @@ jobs:
     steps:
        - uses: actions/checkout@v3
        - name: CodeAnalysis_Quality_gates
-         run: echo 'code analysis quality gates'
+         run: echo 'code analysis quality gates
        - name: SecurityAnalysis_Quality_gates
          run: echo 'security analysis quality gates'
          
