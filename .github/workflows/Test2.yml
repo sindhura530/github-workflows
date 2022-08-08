@@ -1,4 +1,4 @@
-name: Deployment2
+name: deployment2
 on:
   push:
     branches:
