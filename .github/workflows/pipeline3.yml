@@ -14,7 +14,7 @@ jobs:
         #( github.ref != 'refs/heads/develop' )
     #if: ( github.ref_name != 'main' || github.ref_name != 'master')  && github.ref_name != 'develop'
     #if: ((github.ref_name != 'main' || github.ref_name != 'master') && (github.ref_name != 'develop'))
-    if: ${{ (github.ref_name != 'main' && 'develop') || 'master' }}
+    if: ${{ (github.ref_name != 'main' && 'master') || 'develop' }}
    
     steps:
       - run: echo "build-dev"
