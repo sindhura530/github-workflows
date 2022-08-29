@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.ref == 'refs/heads/develop' }}
     steps:
-      - run: eho "build-stage"
+      - run: echo "build-stage"
       
   build-prod:
     runs-on: ubuntu-latest
