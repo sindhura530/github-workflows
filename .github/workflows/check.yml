@@ -32,7 +32,7 @@ jobs:
   code-analysis:
     runs-on: ubuntu-latest
     needs: [build-dev,build-test,build-stage,build-prod]
-    if: success('build-dev') && success('build-test')
+    if: feature/test && success('build-dev') && success('build-test')
     steps:
       - run: echo "code analysis"
         
