@@ -1,27 +1,38 @@
 name: Pipeline
 on: 
-  push: 
-    branches:
-    - feature/*
-    - feature*
+  workflow_dispatch:
  
 jobs: 
   build-dev:
+    runs-on: ubuntu-latest
     if: ${{ github.event.ref != 'refs/heads/master' || github.event.ref != 'refs/heads/main' }} && ${{ github.event.ref != 'refs/heads/develop' }}
-    echo " build-dev "
+    steps:
+      - run: echo " build-dev "
+      
   build-test:
+    runs-on: ubuntu-latest
     if: ${{ github.event.ref != 'refs/heads/master' || github.event.ref != 'refs/heads/main' }} && ${{ github.event.ref != 'refs/heads/develop' }}
-    echo "build-test"
+    steps:
+       - run: echo "build-test"
+       
   build-stage:
+    runs-on: ubuntu-latest
     if: ${{ github.event.ref == 'refs/heads/develop' }}
-    echo "build-stage"
+    steps:
+      - run: echo "build-stage"
+      
   build-prod:
+    runs-on: ubuntu-latest
     if: ${{ github.event.ref == 'refs/heads/master' || github.event.ref == 'refs/heads/main' }}
-    echo "build-prod"
+    steps:
+      - run: echo "build-prod"
+      
   code-analysis:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         build-jobs: [build-dev,build-test,build-stage,build-prod]
-    echo"code analysis"
+    steps:
+      - run: echo"code analysis"
         
   
