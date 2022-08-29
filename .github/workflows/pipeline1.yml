@@ -8,8 +8,7 @@ on:
 jobs: 
   build-dev:
     runs-on: ubuntu-latest
-    if: ${{ !contains(github.ref, 'feature-') }} || ${{ !contains(github.ref, 'feature/') }}
-    #if: contains(github.ref, 'feature-') || contains(github.ref, 'feature/')
+    if: contains(github.ref, 'feature-') || contains(github.ref, 'feature/')
     steps:
       - run: echo "build-dev"
       
