@@ -34,7 +34,7 @@ jobs:
     needs: [build-dev,build-test,build-stage,build-prod]
     steps:
       - name: code-analysis for build-dev and build-test
-        if: success('build-dev') && success('build-test')
+        if: success('build-dev') 
         run: echo "build-dev and build test"
      
         
