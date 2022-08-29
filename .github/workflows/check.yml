@@ -36,11 +36,6 @@ jobs:
       - name: code-analysis for build-dev and build-test
         if: success('build-dev') && success('build-test')
         run: echo "build-dev and build test"
-      - name: code-analysis for build-stage
-        if: success('build-stage')
-        run: echo "build-stage"
-      - name: code-analysis for build-prod
-        if: success('build-prod')
-        run: echo "build-prod"
+     
         
   
