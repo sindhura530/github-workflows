@@ -1,4 +1,4 @@
-name: Pipeline3
+name: Pipeline1
 on: 
   workflow_dispatch:
   push:
