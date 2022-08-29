@@ -31,9 +31,7 @@ jobs:
       
   code-analysis:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        build-jobs: [build-dev,build-test,build-stage,build-prod]
+    needs: [build-dev,build-test,build-stage,build-prod]
     steps:
       - run: echo"code analysis"
         
