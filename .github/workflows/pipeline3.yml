@@ -9,7 +9,9 @@ jobs:
   build-dev:
     runs-on: ubuntu-latest
     #if: contains(github.ref, 'feature-') || contains(github.ref, 'feature/')
-    if: ${{ github.event.ref != 'refs/heads/main' }}
+    #if: ${{ github.event.ref != 'refs/heads/main' }}
+    if: (github.event.ref == 'refs/heads/main' || github.event.ref == 'refs/heads/master') &&
+        (github.event.ref == 'refs/heads/develop')
     steps:
       - run: echo "build-dev"
       
