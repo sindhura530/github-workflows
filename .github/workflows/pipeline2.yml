@@ -33,8 +33,8 @@ jobs:
   code-analysis:
     runs-on: ubuntu-latest
     needs: [build-dev,build-test,build-stage,build-prod]
-    if: (contains(github.ref, 'feature/') && success('build-dev') && success('build-test')) || 
-        (contains(github.ref, 'develop') && success('build-stage')) ||
-        (contains(github.ref, 'main') && success('build-prod'))
+    if: success('build-dev') && success('build-test')) || 
+        success('build-stage')) ||
+        success('build-prod'))
     steps:
        - run: echo "sonar analysis"
