@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     if: contains(github.ref, 'feature-') || contains(github.ref, 'feature/')
     steps:
-      - run: echo "build-dev"
+      - run: cho "build-dev"
       
   build-test:
     runs-on: ubuntu-latest
