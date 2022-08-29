@@ -2,7 +2,8 @@ name: Pipeline2
 on: 
   workflow_dispatch:
   push:
-    branches: feature/test
+    branches: [feature/test, develop]
+    
  
 jobs: 
   build-dev:
