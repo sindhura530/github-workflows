@@ -14,16 +14,15 @@ jobs:
       
   build-test:
     runs-on: ubuntu-latest
-    #if: ${{ github.event.ref == 'refs/heads/feature' }}
     if: contains(github.ref, 'feature-') || contains(github.ref, 'feature/')
     steps:
-       - run: echo "build-test"
+       - run: cho "build-test"
        
   build-stage:
     runs-on: ubuntu-latest
     if: ${{ github.event.ref == 'refs/heads/develop' }}
     steps:
-      - run: echo "build-stage"
+      - run: eho "build-stage"
       
   build-prod:
     runs-on: ubuntu-latest
@@ -39,6 +38,3 @@ jobs:
         (contains(github.ref, 'main') && success('build-prod'))
     steps:
        - run: echo "sonar analysis"
-     
-        
-  
