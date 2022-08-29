@@ -1,0 +1,45 @@
+name: Pipeline3
+on: 
+  workflow_dispatch:
+  push:
+    branches: [feature/*, develop, main, master]
+    
+ 
+jobs: 
+  build-dev:
+    runs-on: ubuntu-latest
+    #if: contains(github.ref, 'feature-') || contains(github.ref, 'feature/')
+    #if: ${{ github.event.ref != 'refs/heads/main' }}
+    if: (github.event.ref == 'refs/heads/main' || github.event.ref == 'refs/heads/master') &&
+        (github.event.ref == 'refs/heads/develop')
+    steps:
+      - run: echo "build-dev"
+      
+  build-test:
+    runs-on: ubuntu-latest
+    #if: contains(github.ref, 'feature-') || contains(github.ref, 'feature/')
+    if: (github.event.ref == 'refs/heads/main' || github.event.ref == 'refs/heads/master') &&
+        (github.event.ref == 'refs/heads/develop')
+    steps:
+       - run: cho "build-test"
+       
+  build-stage:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.ref == 'refs/heads/develop' }}
+    steps:
+      - run: echo "build-stage"
+      
+  build-prod:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.ref == 'refs/heads/master' || github.event.ref == 'refs/heads/main' }}
+    steps:
+      - run: echo "build-prod"
+      
+  code-analysis:
+    runs-on: ubuntu-latest
+    needs: [build-dev,build-test,build-stage,build-prod]
+    if: (success('build-dev') && success('build-test')) || 
+        success('build-stage') ||
+        success('build-prod')
+    steps:
+       - run: echo "sonar analysis"

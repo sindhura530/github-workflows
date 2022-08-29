@@ -1,6 +1,7 @@
-name: pipelineConfig
+name: pipelineInputs
 on:
   workflow_call:
+  
   
       outputs:
       
@@ -31,32 +32,27 @@ on:
             value: "12149-SP.zip"
          rtDownload_AppArtficat:
              value: ""
-            
-         changeNumber:
-            value: "CHG1234567"
-            
-         DEV_resourceGroup:
-           value: "ab-1111-a-"
-         DEV_staticwebappName: 
-           value: "aaaaa-12341-c-000"
-         DEV_env:
-           value: "dev"
-           
-         STAGE_resourceGroup: 
-             value: "rg-11111-d-000"
-         STAGE_staticwebappName: 
-            value: "azapp-11119-d-000"
-         STAGE_env: 
-            value: "dev-test"  
-            
-         PROD_resourceGroup: 
-            value: "rg-11111-d-001"
-         PROD_staticwebappName: 
-            value: "azapp-11111-d-000"
-         PROD_Env: 
-            value: "prodcution"   
-                     
+  
+  
 jobs:
-  example_job:
-    #runs-on: [ ubuntu-latest]
-    uses: sindhura530/github-workflows/.github/workflows/main.yml@main
+
+  Environments:
+    runs-on: [ ubuntu-latest]
+    steps:
+      - name: Dev Environment
+        env:
+          DEV_resourceGroup: "rg-12149-d-006"
+          DEV_staticwebappName: "azapp-12149-d-006"
+          DEV_env: "dev"
+      - name: Stage Environment
+        env:
+          STAGE_resourceGroup: "rg-12149-d-006"
+          STAGE_staticwebappName: "azapp-12149-d-006"
+          STAGE_env: "stage"
+      - name: Prod Environment
+        env:
+          PROD_resourceGroup: "rg-12149-d-006"
+          PROD_staticwebappName: "azapp-12149-d-006"
+          PROD_env: "stage"
+    
+        

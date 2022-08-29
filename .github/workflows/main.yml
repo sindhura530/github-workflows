@@ -1,36 +1,37 @@
-name: CI and CD pipeline
+name: CI and CD Pipeline
 on:
   #push: 
      #branches: [feature, develop, main]
   pull_request: 
      branches: [feature, develop, main]
-  
+  workflow_dispatch:
+  workflow_call:
   
 jobs:
   inputs:
-     uses: sindhura530/github-workflows/.github/workflows/pipelineConfig.yml@feature
+     uses: sindhura530/github-workflows/.github/workflows/pipelineConfig.yml@main
      
-  check_maven:
+  check_javaNode:
      needs: inputs
      if: "contains(needs.inputs.outputs.buildTool, 'maven') && contains(needs.inputs.outputs.language, 'java')"
-     uses: sindhura530/github-workflows/.github/workflows/maven.yml@feature  
+     uses: sindhura530/github-workflows/.github/workflows/java_node.yml@main 
      with:
-       javaVersion: '12'
+       javaVersion: ${{ needs.inputs.outputs.javaVersion }}
+       nodeVersion: ${{ needs.inputs.outputs.nodeVersion }}
        
-  check_npm:
-    needs: inputs
-    if: "contains(needs.inputs.outputs.buildTool, 'npm') && contains(needs.inputs.outputs.language, 'java') && contains(needs.inputs.outputs.javaVersion, 1.8)"
-    uses: sindhura530/github-workflows/.github/workflows/npm.yml@feature
-    with:
-      image_name: ubuntu
-    secrets:
-       registry_username: ${{ secrets.REGISTRY_USERNAME }}
-       registry_password: ${{ secrets.REGISTRY_PASSWORD }}
-       
+  check_NodeAngular:
+     needs: inputs
+     if: "contains(needs.inputs.outputs.buildTool, 'npm') && contains(needs.inputs.outputs.language, 'node')"
+     uses: sindhura530/github-workflows/.github/workflows/node_angular.yml@main 
+     with:
+       nodeVersion: 12 #${{ needs.inputs.outputs.nodeVersion }}
+       angularVersion: 12  #${{ needs.inputs.outputs.angularVersion }}
+        
 
   Code-Quality:
-    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
-    needs: [check_maven, check_npm]
+    #if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    needs: [check_NodeAngular, check_javaNode ]
+    #follows: [check_NodeAngular, check_javaNode ]
     runs-on: ubuntu-latest
     container: 
       image: openjdk:11
@@ -39,10 +40,6 @@ jobs:
        - uses: actions/checkout@v3
        - name: code Analysis
          run: echo 'mvn sonar:sonar'
-       - name: Download artifacts
-         uses: actions/download-artifact@v2
-         with:
-           name: artifact2
            
           
   security-scan:
@@ -63,7 +60,7 @@ jobs:
     steps:
        - uses: actions/checkout@v3
        - name: CodeAnalysis_Quality_gates
-         run: echo 'code analysis quality gates'
+         run: echo 'code analysis quality gates
        - name: SecurityAnalysis_Quality_gates
          run: echo 'security analysis quality gates'
          
@@ -150,14 +147,17 @@ jobs:
           
   Deploy_PROD:
     if: ${{ always() && github.event.ref == 'refs/heads/main' }}
-    needs: [ChangeRequest_Validation]
+    needs: [ChangeRequest_Validation, ]
     runs-on: ubuntu-latest
+    env:
+      resourceGroup: ${{ needs.inputs.outputs.environments.prod.resourceGroup }} 
+      staticwebappName: ${{ needs.inputs.outputs.environments.prod.staticwebappName }}
+      env: ${{ needs.inputs.outputs.environments.prod.env }}
     environment: 
       name: Production
-      url: sindhura530/github-workflows@main
     steps:
       - name: deploying
         run: |
-             echo " **************************************** "
-             echo " prod deployment Finished: SUCCESS "
-             echo " **************************************** "
+             echo "$resourceGroup"
+             echo "$staticwebappName"
+             echo "$env"
