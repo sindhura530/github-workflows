@@ -2,7 +2,7 @@ name: Pipeline3
 on: 
   workflow_dispatch:
   push:
-    branches: [feature/*, develop, main]
+    branches: [feature/*, develop, main, master]
     
  
 jobs: 
@@ -14,10 +14,9 @@ jobs:
       
   build-test:
     runs-on: ubuntu-latest
-    #if: ${{ github.event.ref == 'refs/heads/feature' }}
     if: contains(github.ref, 'feature-') || contains(github.ref, 'feature/')
     steps:
-       - run: echo "build-test"
+       - run: cho "build-test"
        
   build-stage:
     runs-on: ubuntu-latest
