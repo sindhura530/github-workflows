@@ -32,10 +32,10 @@ jobs:
   code-analysis:
     runs-on: ubuntu-latest
     needs: [build-dev,build-test,build-stage,build-prod]
-    if: contains(github.ref, 'feature/test') && success('build-dev') && success('build-test')
+    #if: contains(github.ref, 'feature/test') && success('build-dev') && success('build-test')
     steps:
-      #- if: contains(github.ref, 'feature/test') && success('build-dev') && success('build-test')
-      - run: echo "build-dev and build test"
+      - if: contains(github.ref, 'feature/test') && success('build-dev') && success('build-test')
+        run: echo "build-dev and build test"
      
         
   
