@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: current date tag
         id: date
-        run: echo "::set-output name=date::$(date /t)"
+        run: echo "::set-output name=date::(date /t)"
       - name: build docker-image with tag
         run: |
              docker build -t ${{ steps.date.outputs.date }} .
