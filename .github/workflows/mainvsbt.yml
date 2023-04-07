@@ -6,21 +6,20 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Install VSBT 2019
-      run: |
-        $url = 'https://aka.ms/vs/16/release/vs_buildtools.exe'
-        $output = "$env:C:\vs_buildtools.exe"
-        Invoke-WebRequest -Uri $url -OutFile $output
-        $arguments = '--quiet --wait --norestart --nocache --noUpdateInstaller --includeRecommended --includeOptional --add Microsoft.VisualStudio.Workload.VCTools;includeRecommended --add Microsoft.VisualStudio.Workload.MSBuildTools --installPath C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools'
-        Start-Process -FilePath $output -ArgumentList $arguments -NoNewWindow -Wait
-     - name: check
-       shell: pwsh
-       run: |
+      - name: Install VSBT 2019
+        run: |
+             $url = 'https://aka.ms/vs/16/release/vs_buildtools.exe'
+             $output = "$env:C:\vs_buildtools.exe"
+             Invoke-WebRequest -Uri $url -OutFile $output
+             $arguments = '--quiet --wait --norestart --nocache --noUpdateInstaller --includeRecommended --includeOptional --add Microsoft.VisualStudio.Workload.VCTools;includeRecommended --add Microsoft.VisualStudio.Workload.MSBuildTools --installPath C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools'
+             Start-Process -FilePath $output -ArgumentList $arguments -NoNewWindow -Wait
+      - name: check
+        shell: pwsh
+        run: |
             dir
             cd "Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\"
             dir
